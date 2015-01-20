@@ -1,4 +1,17 @@
-<h1>New order</h1>
+<h1>Guitar Builder</h1>
+
+<h3>Ready to start your order? First choose a maximum price and we'll warn you if any options exceed it.</h3>
+
+<div class="field">
+  <%= label_tag 'Maximum Price' %><br>
+  <%= number_field(:test, :maximum_price, min: 0) %>
+</div>
+
+<h3>Use the options below to customize your guitar.</h3>
+
+<h3>Placeholder...</h3>
+
+<h3>Enter your shipping and billing details</h3>
 
 <%= render 'form' %>
 

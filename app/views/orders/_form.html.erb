@@ -11,22 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :number %><br>
-    <%= f.text_field :number %>
-  </div>
-  <div class="field">
-    <%= f.label :completion_date %><br>
-    <%= f.date_select :completion_date %>
-  </div>
+  <!-- TODO only edit -->
   <div class="field">
     <%= f.label :status %><br>
     <%= f.text_field :status %>
   </div>
   <div class="field">
     <%= f.label :delivery_type %><br>
-    <%= f.text_field :delivery_type %>
+    <%= f.select :delivery_type, ['Ship', 'Local Pick-Up'] %>
   </div>
+  <p id='ship'>Your credit card will not be charged until your guitar ships.</p>
+  <p id='local' hidden>Your credit card will be charged a $50 hold fee until you pick up your guitar.</p>	
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>
@@ -48,8 +43,12 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :cc_number %><br>
+    <%= f.label 'Credit Card Number' %><br>
     <%= f.text_field :cc_number %>
+  </div>
+  <div class="field">
+    <%= f.label :completion_date %><br>
+    <%= f.date_select :completion_date %>
   </div>
   <div class="field">
     <%= f.hidden_field :lock_version %><br>
