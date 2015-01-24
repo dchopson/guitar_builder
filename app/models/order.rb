@@ -1,11 +1,18 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   
+  DELIVERY_TYPES = {
+   ship: 'Ship',
+   local: 'Local Pick-Up'
+  }
+  
   STATUSES = {
     pending: 'Pending', 
     in_progress: 'In Progress', 
     complete: 'Complete'
   }
+  
+  HOLD_FEE = 50
   
   scope :pending, -> { where(status: STATUSES[:pending]) }
   scope :in_progress, -> { where(status: STATUSES[:in_progress]) }
@@ -15,6 +22,12 @@ class Order < ActiveRecord::Base
   
   # TODO generate a random number for each order
   # before_create :generate_random_number
+  
+  def self.method_missing(method, *args)
+    order_const = Order.const_get(method.upcase)
+    return order_const unless order_const.is_a?(Hash)
+    order_const.map{|_,v| v}
+  end
   
   private
   

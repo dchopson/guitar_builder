@@ -1,3 +1,6 @@
+<% i18n_scope = [:views, :orders, :form] %>
+<% currency = t(:unit, scope: [:number, :currency, :format])%>
+
 <%= form_for(@order) do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
@@ -11,17 +14,19 @@
     </div>
   <% end %>
 
-  <!-- TODO only edit -->
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
+  <% if editing? %>
+    <div class="field">
+      <%= f.label :status %><br>
+      <%= f.select :status, Order.statuses %>
+    </div>
+  <% end %>
+  
   <div class="field">
     <%= f.label :delivery_type %><br>
-    <%= f.select :delivery_type, ['Ship', 'Local Pick-Up'] %>
+    <%= f.select :delivery_type, Order.delivery_types %>
   </div>
-  <p id='ship'>Your credit card will not be charged until your guitar ships.</p>
-  <p id='local' hidden>Your credit card will be charged a $50 hold fee until you pick up your guitar.</p>	
+  <p id='ship'><%= t(:ship, scope: i18n_scope) %></p>
+  <p id='local' hidden><%= t(:local, currency: currency, hold_fee: Order.hold_fee, scope: i18n_scope) %></p>	
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>
@@ -43,12 +48,12 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label 'Credit Card Number' %><br>
+    <%= f.label :cc_number %><br>
     <%= f.text_field :cc_number %>
   </div>
   <div class="field">
     <%= f.label :completion_date %><br>
-    <%= f.date_select :completion_date %>
+    <%= f.date_field :completion_date, disabled: !editing? %>
   </div>
   <div class="field">
     <%= f.hidden_field :lock_version %><br>
