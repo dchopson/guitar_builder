@@ -1,15 +1,17 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   
+  i18n_scope = [:models, :order]
+  
   DELIVERY_TYPES = {
-   ship: 'Ship',
-   local: 'Local Pick-Up'
+    local: I18n.t('delivery_types.local', scope: i18n_scope),
+    ship: I18n.t('delivery_types.ship', scope: i18n_scope)
   }
   
   STATUSES = {
-    pending: 'Pending', 
-    in_progress: 'In Progress', 
-    complete: 'Complete'
+    complete: I18n.t('statuses.complete', scope: i18n_scope),
+    in_progress: I18n.t('statuses.in_progress', scope: i18n_scope),
+    pending: I18n.t('statuses.pending', scope: i18n_scope)
   }
   
   HOLD_FEE = 50
@@ -17,11 +19,8 @@ class Order < ActiveRecord::Base
   scope :pending, -> { where(status: STATUSES[:pending]) }
   scope :in_progress, -> { where(status: STATUSES[:in_progress]) }
   
-  after_initialize :set_completion_date
-  before_create :set_status
-  
   # TODO generate a random number for each order
-  # before_create :generate_random_number
+  before_create :set_completion_date, :set_status#, :set_number
   
   def self.method_missing(method, *args)
     order_const = Order.const_get(method.upcase)
@@ -37,10 +36,10 @@ class Order < ActiveRecord::Base
   end
   
   def set_status
-    self.status = STATUSES[:new]
+    self.status = STATUSES[:pending]
   end
   
-  # def generate_random_number
+  # def set_number
     # random = SecureRandom.base64(8)
   # end
 end

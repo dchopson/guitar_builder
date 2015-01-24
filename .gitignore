@@ -17,3 +17,6 @@
 
 # Ignore Editor files
 .project
+
+# Ignore simplecov files
+/coverage

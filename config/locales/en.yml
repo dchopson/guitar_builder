@@ -4,8 +4,17 @@ en:
       order:
         cc_number: Credit Card Number
         completion_date: Estimated Completion Date
+  models:
+    order:
+      delivery_types:
+        local: Local Pick-Up
+        ship: Ship
+      statuses:
+        complete: Complete
+        in_progress: In Progress
+        pending: Pending
   views:
     orders:
       form:
-        ship: Your credit card will not be charged until your guitar ships.
         local: Your credit card will be charged a %{currency}%{hold_fee} hold fee until you pick up your guitar.
+        ship: Your credit card will not be charged until your guitar ships.

@@ -32,8 +32,18 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-gem 'pry-byebug', group: [:development, :test]
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+  gem 'pry-byebug'
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
