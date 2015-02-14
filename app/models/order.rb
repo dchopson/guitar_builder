@@ -1,5 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :user
+  has_many :guitars, dependent: :destroy
+  accepts_nested_attributes_for :guitars
   
   i18n_scope = [:models, :order]
   
@@ -20,7 +22,8 @@ class Order < ActiveRecord::Base
   scope :in_progress, -> { where(status: STATUSES[:in_progress]) }
   
   # TODO generate a random number for each order
-  before_create :set_completion_date, :set_status#, :set_number
+  after_initialize :set_completion_date 
+  before_create :set_status#, :set_number
   
   def self.method_missing(method, *args)
     order_const = Order.const_get(method.upcase)
@@ -31,8 +34,10 @@ class Order < ActiveRecord::Base
   private
   
   def set_completion_date
-    wait_time = Order.pending.count + Order.in_progress.count + 1
-    self.completion_date = Date.today + wait_time.days
+    if self.new_record?
+      wait_time = Order.pending.count + Order.in_progress.count + 1
+      self.completion_date = Date.today + wait_time.days
+    end
   end
   
   def set_status

@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @guitar = @order.guitars.new
   end
 
   # GET /orders/1/edit
@@ -62,13 +63,41 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:number, :completion_date, :status, :delivery_type, :first_name, :last_name, :address, :telephone, :email, :cc_number, :user_id, :lock_version)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(
+    :number, 
+    :completion_date, 
+    :status, 
+    :delivery_type, 
+    :first_name, 
+    :last_name, 
+    :address, 
+    :telephone, 
+    :email, 
+    :cc_number, 
+    :user_id, 
+    :lock_version,
+    guitars_attributes: [
+      :id, 
+      :body_style,
+      :body_wood,
+      :body_finish,
+      :pick_guard,
+      :fretboard_wood,
+      :fretboard_finish,
+      :fretboard_markers,
+      :neck_wood,
+      :neck_finish,
+      :tuning_peg_style,
+      :tuning_peg_layout,
+      :string_type
+    ])
+  end
 end

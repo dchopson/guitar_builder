@@ -3,21 +3,24 @@ require 'rails_helper'
 RSpec.describe Order, :type => :model do
   describe 'associations' do
     xit { is_expected.to belong_to :user }
+    it { is_expected.to have_many :guitars }
+    it { is_expected.to accept_nested_attributes_for :guitars }
   end
   
-  describe '.before_create' do
+  describe 'callbacks' do
     let(:order) { described_class.new }
     
-    before :each do
-      order.save!
+    context 'initialize new' do
+      it 'sets the completion date' do
+        expect(order.completion_date).to_not be_nil
+      end
     end
     
-    it 'sets the completion date before create' do
-      expect(order.completion_date).to_not be_nil
-    end
-    
-    it 'sets the status before create' do
-      expect(order.status).to_not be_nil
+    context 'before create' do
+      it 'sets the status' do
+        order.save!
+        expect(order.status).to_not be_nil
+      end      
     end
   end
   

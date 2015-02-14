@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113035726) do
+ActiveRecord::Schema.define(version: 20150125211332) do
+
+  create_table "guitars", force: true do |t|
+    t.string   "body_style"
+    t.string   "body_wood"
+    t.string   "body_finish"
+    t.boolean  "pick_guard"
+    t.string   "fretboard_wood"
+    t.string   "fretboard_finish"
+    t.boolean  "fretboard_markers"
+    t.string   "neck_wood"
+    t.string   "neck_finish"
+    t.string   "tuning_peg_style"
+    t.string   "tuning_peg_layout"
+    t.string   "string_type"
+    t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guitars", ["order_id"], name: "index_guitars_on_order_id"
 
   create_table "orders", force: true do |t|
     t.string   "number"

@@ -13,6 +13,61 @@
       </ul>
     </div>
   <% end %>
+  
+  <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
+
+  <%= f.fields_for :guitars do |guitars_form| %>
+    <div class="field">
+      <%= guitars_form.label :body_style %><br>
+      <%= guitars_form.select :body_style, ['Cutaway', 'Full', 'Half-Cutaway'] %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :body_wood %><br>
+      <%= guitars_form.text_field :body_wood %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :body_finish %><br>
+      <%= guitars_form.text_field :body_finish %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :pick_guard %><br>
+      <%= guitars_form.check_box :pick_guard %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :fretboard_wood %><br>
+      <%= guitars_form.text_field :fretboard_wood %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :fretboard_finish %><br>
+      <%= guitars_form.text_field :fretboard_finish %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :fretboard_markers %><br>
+      <%= guitars_form.check_box :fretboard_markers %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :neck_wood %><br>
+      <%= guitars_form.text_field :neck_wood %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :neck_finish %><br>
+      <%= guitars_form.text_field :neck_finish %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :tuning_peg_style %><br>
+      <%= guitars_form.text_field :tuning_peg_style %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :tuning_peg_layout %><br>
+      <%= guitars_form.text_field :tuning_peg_layout %>
+    </div>
+    <div class="field">
+      <%= guitars_form.label :string_type %><br>
+      <%= guitars_form.text_field :string_type %>
+    </div>
+  <% end %>
+  
+  <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
 
   <% if editing? %>
     <div class="field">
