@@ -13,21 +13,33 @@
       </ul>
     </div>
   <% end %>
-  
+
   <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
 
   <%= f.fields_for :guitars do |guitars_form| %>
     <div class="field">
       <%= guitars_form.label :body_style %><br>
-      <%= guitars_form.select :body_style, ['Cutaway', 'Full', 'Half-Cutaway'] %>
+      <%= guitars_form.select(:body_style) do %>
+        <% Guitar.body_styles.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :body_wood %><br>
-      <%= guitars_form.text_field :body_wood %>
+      <%= guitars_form.select(:body_wood) do %>
+        <% Guitar.body_woods.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :body_finish %><br>
-      <%= guitars_form.text_field :body_finish %>
+      <%= guitars_form.select(:body_finish) do %>
+        <% Guitar.body_finishes.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :pick_guard %><br>
@@ -35,11 +47,19 @@
     </div>
     <div class="field">
       <%= guitars_form.label :fretboard_wood %><br>
-      <%= guitars_form.text_field :fretboard_wood %>
+      <%= guitars_form.select(:fretboard_wood) do %>
+        <% Guitar.fretboard_woods.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :fretboard_finish %><br>
-      <%= guitars_form.text_field :fretboard_finish %>
+      <%= guitars_form.select(:fretboard_finish) do %>
+        <% Guitar.fretboard_finishes.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :fretboard_markers %><br>
@@ -47,26 +67,49 @@
     </div>
     <div class="field">
       <%= guitars_form.label :neck_wood %><br>
-      <%= guitars_form.text_field :neck_wood %>
+      <%= guitars_form.select(:neck_wood) do %>
+        <% Guitar.neck_woods.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :neck_finish %><br>
-      <%= guitars_form.text_field :neck_finish %>
+      <%= guitars_form.select(:neck_finish) do %>
+        <% Guitar.neck_finishes.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :tuning_peg_style %><br>
-      <%= guitars_form.text_field :tuning_peg_style %>
+      <%= guitars_form.select(:tuning_peg_style) do %>
+        <% Guitar.tuning_peg_styles.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :tuning_peg_layout %><br>
-      <%= guitars_form.text_field :tuning_peg_layout %>
+      <%= guitars_form.select(:tuning_peg_layout) do %>
+        <% Guitar.tuning_peg_layouts.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
     </div>
     <div class="field">
       <%= guitars_form.label :string_type %><br>
-      <%= guitars_form.text_field :string_type %>
+      <%= guitars_form.select(:string_type) do %>
+        <% Guitar.string_types.each do |a| -%>
+          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="field">
+      Total price: <span id='total_price'></span>
     </div>
   <% end %>
-  
+
   <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
 
   <% if editing? %>
@@ -75,13 +118,13 @@
       <%= f.select :status, Order.statuses %>
     </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :delivery_type %><br>
     <%= f.select :delivery_type, Order.delivery_types %>
   </div>
-  <p id='ship'><%= t(:ship, scope: i18n_scope) %></p>
-  <p id='local' hidden><%= t(:local, currency: currency, hold_fee: Order.hold_fee, scope: i18n_scope) %></p>	
+  <p id='ship' hidden><%= t(:ship, scope: i18n_scope) %></p>
+  <p id='local'><%= t(:local, currency: currency, hold_fee: Order.hold_fee, scope: i18n_scope) %></p>
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>

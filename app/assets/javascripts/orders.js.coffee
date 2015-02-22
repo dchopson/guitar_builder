@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  $deliveryType = $('#order_delivery_type') 
+  $deliveryType = $('#order_delivery_type')
   $deliveryType.change ->
     if @value == 'Ship'
       $('#ship').show()
@@ -11,3 +11,10 @@ jQuery ->
     else
       $('#ship').hide()
       $('#local').show()
+
+  $('select').change ->
+    total_price = 0
+    $("select[id*='guitars_attributes']").each ->
+      total_price += $(this).find('option:selected').data('price')
+
+    $('#total_price').text(total_price)
