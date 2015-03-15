@@ -2,19 +2,27 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-jQuery ->
-  $deliveryType = $('#order_delivery_type')
-  $deliveryType.change ->
-    if @value == 'Ship'
+class Order
+  constructor: ->
+    @guitarSelects = $("select[id*='guitars_attributes']")
+    @deliveryType = $('#order_delivery_type')
+    @guitarSelects.on('change', @updatePrice)
+    @deliveryType.on('change', @toggleDelivery)
+
+  updatePrice: =>
+    total_price = 0
+    @guitarSelects.each ->
+      total_price += $(@).find('option:selected').data('price')
+    $('#total_price').text(total_price)
+
+
+  toggleDelivery: ->
+    if @value == I18n.t('models.order.delivery_types.ship')
       $('#ship').show()
       $('#local').hide()
     else
       $('#ship').hide()
       $('#local').show()
 
-  $('select').change ->
-    total_price = 0
-    $("select[id*='guitars_attributes']").each ->
-      total_price += $(this).find('option:selected').data('price')
-
-    $('#total_price').text(total_price)
+$(document).ready ->
+  new Order()

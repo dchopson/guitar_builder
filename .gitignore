@@ -20,3 +20,6 @@
 
 # Ignore simplecov files
 /coverage
+
+# Ignore i18n-js translations
+/public/javascripts/

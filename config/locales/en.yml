@@ -3,8 +3,8 @@ en:
   activerecord:
     attributes:
       order:
-        cc_number: "Credit Card Number"
-        completion_date: "Estimated Completion Date"
+        cc_number: Credit Card Number
+        completion_date: Estimated Completion Date
   models:
     guitar:
       body_styles:
@@ -13,20 +13,20 @@ en:
         half_cutaway: Half-Cutaway
     order:
       delivery_types:
-        local: "Local Pick-Up"
+        local: Local Pick-Up
         ship: Ship
       statuses:
         complete: Complete
-        in_progress: "In Progress"
+        in_progress: In Progress
         pending: Pending
   views:
     orders:
       form:
-        guitar_intro: "Use the options below to customize your guitar."
-        local: "Your credit card will be charged a %{currency}%{hold_fee} hold fee until you pick up your guitar."
-        order_intro: "Enter your shipping and billing details."
-        ship: "Your credit card will not be charged until your guitar ships."
+        guitar_intro: Use the options below to customize your guitar.
+        local: Your credit card will be charged a %{currency}%{hold_fee} hold fee until you pick up your guitar.
+        order_intro: Enter your shipping and billing details.
+        ship: Your credit card will not be charged until your guitar ships.
       new:
-        intro: "Ready to start your order? First choose a maximum price and we'll warn you if any options exceed it."
-        max_price: "Maximum Price"
-    site_name: "Guitar Builder"
+        intro: Ready to start your order? First choose a maximum price and we'll warn you if any options exceed it.
+        max_price: Maximum Price
+    site_name: Guitar Builder
