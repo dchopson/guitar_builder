@@ -16,14 +16,9 @@
 
   <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
 
-  <%= f.fields_for :guitars do |guitars_form| %>
+  <%= f.fields_for :guitars, builder: GuitarFormBuilder do |guitars_form| %>
     <div class="field">
-      <%= guitars_form.label :body_style %><br>
-      <%= guitars_form.select(:body_style) do %>
-        <% Guitar.body_styles.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
+      <%= guitar_select(guitars_form, :body_style) %>
     </div>
     <div class="field">
       <%= guitars_form.label :body_wood %><br>
