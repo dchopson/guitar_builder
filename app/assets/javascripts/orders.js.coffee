@@ -6,6 +6,10 @@ class Order
   constructor: ->
     @guitarSelects = $("select[id*='guitars_attributes']")
     @deliveryType = $('#order_delivery_type')
+    @bindEvents()
+    @updatePrice()
+
+  bindEvents: =>
     @guitarSelects.on('change', @updatePrice)
     @deliveryType.on('change', @toggleDelivery)
 
@@ -14,7 +18,6 @@ class Order
     @guitarSelects.each ->
       total_price += $(@).find('option:selected').data('price')
     $('#total_price').text(total_price)
-
 
   toggleDelivery: ->
     if @value == I18n.t('models.order.delivery_types.ship')

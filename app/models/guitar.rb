@@ -4,13 +4,13 @@ class Guitar < ActiveRecord::Base
   i18n_scope = [:models, :guitar]
 
   FINISHES = {
-    gloss: ['Gloss', 5],
-    raw: ['Raw', 10],
-    sunburst: ['Sunburst', 15],
+    gloss: [I18n.t('finishes.gloss', scope: i18n_scope), 5],
+    raw: [I18n.t('finishes.raw', scope: i18n_scope), 10],
+    sunburst: [I18n.t('finishes.sunburst', scope: i18n_scope), 15],
   }
 
   WOODS = {
-    black_cherry: ['Black Cherry', 5],
+    black_cherry: [I18n.t('woods.black_cherry', scope: i18n_scope), 5],
     cherry: ['Cherry', 10],
     ebony: ['Ebony', 10],
     mahogany: ['Mahogany', 5],

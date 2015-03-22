@@ -11,6 +11,18 @@ en:
         cutaway: Cutaway
         full: Full
         half_cutaway: Half-Cutaway
+      finishes:
+        gloss: Gloss
+        raw: Raw
+        sunburst: Sunburst
+      woods:
+        black_cherry: Black Cherry
+        cherry: Cherry
+        ebony: Ebony
+        mahogany: Mahogany
+        oak: Oak
+        pine: Pine
+        spruce: Spruce
     order:
       delivery_types:
         local: Local Pick-Up
