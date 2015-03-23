@@ -16,90 +16,19 @@
 
   <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
 
-  <%= f.fields_for :guitars, builder: GuitarFormBuilder do |guitars_form| %>
-    <div class="field">
-      <%= guitar_select(guitars_form, :body_style) %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :body_wood %><br>
-      <%= guitars_form.select(:body_wood) do %>
-        <% Guitar.body_woods.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :body_finish %><br>
-      <%= guitars_form.select(:body_finish) do %>
-        <% Guitar.body_finishes.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :pick_guard %><br>
-      <%= guitars_form.check_box :pick_guard %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :fretboard_wood %><br>
-      <%= guitars_form.select(:fretboard_wood) do %>
-        <% Guitar.fretboard_woods.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :fretboard_finish %><br>
-      <%= guitars_form.select(:fretboard_finish) do %>
-        <% Guitar.fretboard_finishes.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :fretboard_markers %><br>
-      <%= guitars_form.check_box :fretboard_markers %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :neck_wood %><br>
-      <%= guitars_form.select(:neck_wood) do %>
-        <% Guitar.neck_woods.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :neck_finish %><br>
-      <%= guitars_form.select(:neck_finish) do %>
-        <% Guitar.neck_finishes.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :tuning_peg_style %><br>
-      <%= guitars_form.select(:tuning_peg_style) do %>
-        <% Guitar.tuning_peg_styles.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :tuning_peg_layout %><br>
-      <%= guitars_form.select(:tuning_peg_layout) do %>
-        <% Guitar.tuning_peg_layouts.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= guitars_form.label :string_type %><br>
-      <%= guitars_form.select(:string_type) do %>
-        <% Guitar.string_types.each do |a| -%>
-          <%= content_tag(:option, a.first, value: a.first, data: {price: a.last}) %>
-        <% end %>
-      <% end %>
-    </div>
+  <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
+    <%= g.guitar_select(:body_style) %>
+    <%= g.guitar_select(:body_wood) %>
+    <%= g.guitar_select(:body_finish) %>
+    <%= g.guitar_checkbox(:pick_guard) %>
+    <%= g.guitar_select(:fretboard_wood) %>
+    <%= g.guitar_select(:fretboard_finish) %>
+    <%= g.guitar_checkbox(:fretboard_markers) %>
+    <%= g.guitar_select(:neck_wood) %>
+    <%= g.guitar_select(:neck_finish) %>
+    <%= g.guitar_select(:tuning_peg_style) %>
+    <%= g.guitar_select(:tuning_peg_layout) %>
+    <%= g.guitar_select(:string_type) %>
     <div class="field">
       Total price: <span id='total_price'></span>
     </div>

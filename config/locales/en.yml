@@ -11,11 +11,26 @@ en:
         cutaway: Cutaway
         full: Full
         half_cutaway: Half-Cutaway
-      finishes:
+      finishes: &finishes
         gloss: Gloss
         raw: Raw
         sunburst: Sunburst
-      woods:
+      body_finishes:
+        <<: *finishes
+      fretboard_finishes:
+        <<: *finishes
+      neck_finishes:
+        <<: *finishes
+      string_types:
+        nylon: Nylon
+        steel: Steel
+      tuning_peg_layouts:
+        both_sides: Both Sides
+        one_side: One Side
+      tuning_peg_styles:
+        rounded: Rounded
+        square: Square
+      woods: &woods
         black_cherry: Black Cherry
         cherry: Cherry
         ebony: Ebony
@@ -23,6 +38,12 @@ en:
         oak: Oak
         pine: Pine
         spruce: Spruce
+      body_woods:
+        <<: *woods
+      fretboard_woods:
+        <<: *woods
+      neck_woods:
+        <<: *woods
     order:
       delivery_types:
         local: Local Pick-Up
