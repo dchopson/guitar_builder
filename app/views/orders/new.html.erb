@@ -2,11 +2,16 @@
 
 <h1><%= t('views.site_name') %></h1>
 
-<h3><%= t(:intro, scope: i18n_scope) %></h3>
-
-<div class="field">
-  <%= label_tag t(:max_price, scope: i18n_scope) %><br>
-  <%= number_field(:test, :max_price, min: 0) %>
+<div class='panel panel-default'>
+  <div class='panel panel-heading'>
+    <h3><%= t(:intro, scope: i18n_scope) %></h3>
+  </div>
+  <div class='panel panel-body'>
+    <div class='form-group'>
+      <%= label_tag t(:max_price, scope: i18n_scope) %><br>
+      <%= number_field(:test, :max_price, min: 0, class: 'form-control') %>
+    </div>
+  </div>
 </div>
 
 <%= render 'form' %>

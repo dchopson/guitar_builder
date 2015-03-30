@@ -1,7 +1,6 @@
 <% i18n_scope = [:views, :orders, :form] %>
-<% currency = t(:unit, scope: [:number, :currency, :format])%>
 
-<%= form_for(@order) do |f| %>
+<%= form_for(@order, builder: GuitarFormBuilder) do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -14,73 +13,59 @@
     </div>
   <% end %>
 
-  <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
-
-  <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
-    <%= g.guitar_select(:body_style) %>
-    <%= g.guitar_select(:body_wood) %>
-    <%= g.guitar_select(:body_finish) %>
-    <%= g.guitar_checkbox(:pick_guard) %>
-    <%= g.guitar_select(:fretboard_wood) %>
-    <%= g.guitar_select(:fretboard_finish) %>
-    <%= g.guitar_checkbox(:fretboard_markers) %>
-    <%= g.guitar_select(:neck_wood) %>
-    <%= g.guitar_select(:neck_finish) %>
-    <%= g.guitar_select(:tuning_peg_style) %>
-    <%= g.guitar_select(:tuning_peg_layout) %>
-    <%= g.guitar_select(:string_type) %>
-    <div class="field">
-      Total price: <span id='total_price'></span>
+  <div class='panel panel-default'>
+    <div class='panel panel-heading'>
+      <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
     </div>
-  <% end %>
-
-  <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
-
-  <% if editing? %>
-    <div class="field">
-      <%= f.label :status %><br>
-      <%= f.select :status, Order.statuses %>
+    <div class='panel panel-body'>
+      <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
+        <%= g.guitar_select(:body_style) %>
+        <%= g.guitar_select(:body_wood) %>
+        <%= g.guitar_select(:body_finish) %>
+        <%= g.guitar_checkbox(:pick_guard) %>
+        <%= g.guitar_select(:fretboard_wood) %>
+        <%= g.guitar_select(:fretboard_finish) %>
+        <%= g.guitar_checkbox(:fretboard_markers) %>
+        <%= g.guitar_select(:neck_wood) %>
+        <%= g.guitar_select(:neck_finish) %>
+        <%= g.guitar_select(:tuning_peg_style) %>
+        <%= g.guitar_select(:tuning_peg_layout) %>
+        <%= g.guitar_select(:string_type) %>
+        <div class='form-group'>
+          <%= t(:total_price, scope: i18n_scope) %>
+          <%= t(:unit, scope: [:number, :currency, :format])%><span id='total_price'></span>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-    <%= f.label :delivery_type %><br>
-    <%= f.select :delivery_type, Order.delivery_types %>
+  <div class='panel panel-default'>
+    <div class='panel panel-heading'>
+      <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
+    </div>
+    <div class='panel panel-body'>
+      <% if editing? %>
+        <%= f.order_select(:status) %>
+      <% end %>
+
+      <%= f.order_select(:delivery_type) %>
+      <p id='ship' hidden><%= t(:ship, scope: i18n_scope) %></p>
+      <p id='local'><%= t(:local, hold_fee: number_to_currency(Order.hold_fee), scope: i18n_scope) %></p>
+      <%= f.order_text_field(:first_name) %>
+      <%= f.order_text_field(:last_name) %>
+      <%= f.order_text_field(:address) %>
+      <%= f.order_text_field(:telephone) %>
+      <%= f.order_text_field(:email) %>
+      <%= f.order_text_field(:cc_number) %>
+      <div class='form-group'>
+        <%= f.label :completion_date %><br>
+        <%= f.date_field :completion_date, disabled: !editing?, class: 'form-control' %>
+      </div>
+    </div>
   </div>
-  <p id='ship' hidden><%= t(:ship, scope: i18n_scope) %></p>
-  <p id='local'><%= t(:local, currency: currency, hold_fee: Order.hold_fee, scope: i18n_scope) %></p>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :telephone %><br>
-    <%= f.text_field :telephone %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :cc_number %><br>
-    <%= f.text_field :cc_number %>
-  </div>
-  <div class="field">
-    <%= f.label :completion_date %><br>
-    <%= f.date_field :completion_date, disabled: !editing? %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :lock_version %><br>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <%= f.hidden_field :lock_version %><br>
+  <div class='actions panel'>
+    <%= f.submit(class: 'btn btn-success') %>
   </div>
 <% end %>
