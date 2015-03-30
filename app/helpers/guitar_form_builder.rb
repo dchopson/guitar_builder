@@ -6,23 +6,23 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
     Guitar.send(label.to_s.pluralize).each do |a|
       tags += @template.content_tag(:option, a[:value], value: a[:value], data: a[:data])
     end
-    helper = @template.select(@object_name, label) do
-      tags.html_safe
+    guitar_tag(label) do
+      @template.select(@object_name, label) { tags.html_safe }
     end
-    guitar_tag(label, helper)
   end
 
   def guitar_checkbox(label)
-    helper = @template.check_box(@object_name, label)
-    guitar_tag(label, helper)
+    guitar_tag(label) do
+      @template.check_box(@object_name, label)
+    end
   end
 
   private
 
-  def guitar_tag(label, helper)
+  def guitar_tag(label)
     @template.content_tag(:div, class: 'field') do
       result = "#{@template.label(@object_name, label)}<br>"
-      result += helper
+      result += yield
       result.html_safe
     end
   end
