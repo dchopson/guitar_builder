@@ -29,6 +29,12 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def order_text_area(label)
+    tag_with_label(label) do
+      @template.text_area(@object_name, label, rows: 4, class: 'form-control')
+    end
+  end
+
   private
 
   def tag_with_label(label)

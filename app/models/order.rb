@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
   end
 
   def set_number
-    random = SecureRandom.urlsafe_base64(8)
+    random = SecureRandom.urlsafe_base64(6)
     random.gsub('-', 'a')
     random.gsub('_', '9')
     self.number = random

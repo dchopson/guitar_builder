@@ -1,2 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+#orders-table td{
+  &:not(.td-button) {
+    @include text-overflow;  
+  }
+}
