@@ -1,6 +1,12 @@
 <% title 'Welcome' %>
+<div class='alert alert-danger alert-dismissible' role='alert' <%= 'hidden=true' if flash[:alert].blank? %>>
+  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+  </button>
+  <%= flash[:alert] %>
+</div>
 <div class="jumbotron">
-  <h1>Welcome to GuitarBuilder</h1>
-  <p>Your one-stop shop for building, customizing, and ordering guitars</p>
+  <h1>Welcome to GuitarBuilder</h1></br>
+  <p>Your one-stop shop for building, customizing, and ordering guitars</p></br>
   <p><%= link_to 'New Order', new_order_path, class: 'btn btn-primary btn-lg', role: 'button'%></p>
 </div>

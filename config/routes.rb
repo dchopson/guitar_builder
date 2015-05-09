@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
+  post 'orders/status' => 'orders#status'
   resources :orders
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -35,7 +35,7 @@ class Order < ActiveRecord::Base
 
   def set_completion_date
     if self.new_record?
-      wait_time = Order.pending.count + Order.in_progress.count + 1
+      wait_time = Order.pending.count + Order.in_progress.count + 15
       self.completion_date = Date.today + wait_time.days
     end
   end
@@ -48,6 +48,6 @@ class Order < ActiveRecord::Base
     random = SecureRandom.urlsafe_base64(6)
     random.gsub('-', 'a')
     random.gsub('_', '9')
-    self.number = random
+    self.number = random.upcase
   end
 end

@@ -22,6 +22,16 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  # POST /orders/status
+  def status
+    order = Order.find_by number: params[:number], email: params[:email]
+    if order
+      redirect_to order
+    else
+      redirect_to welcome_index_path, alert: 'No order found'
+    end
+  end
+
   # POST /orders
   # POST /orders.json
   def create
@@ -63,7 +73,7 @@ class OrdersController < ApplicationController
   end
 
   private
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_order
     @order = Order.find(params[:id])
@@ -72,20 +82,20 @@ class OrdersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
     params.require(:order).permit(
-    :number, 
-    :completion_date, 
-    :status, 
-    :delivery_type, 
-    :first_name, 
-    :last_name, 
-    :address, 
-    :telephone, 
-    :email, 
-    :cc_number, 
-    :user_id, 
+    :number,
+    :completion_date,
+    :status,
+    :delivery_type,
+    :first_name,
+    :last_name,
+    :address,
+    :telephone,
+    :email,
+    :cc_number,
+    :user_id,
     :lock_version,
     guitars_attributes: [
-      :id, 
+      :id,
       :body_style,
       :body_wood,
       :body_finish,
