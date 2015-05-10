@@ -6,7 +6,16 @@
   <%= flash[:alert] %>
 </div>
 <div class="jumbotron">
-  <h1>Welcome to GuitarBuilder</h1></br>
-  <p>Your one-stop shop for building, customizing, and ordering guitars</p></br>
-  <p><%= link_to 'New Order', new_order_path, class: 'btn btn-primary btn-lg', role: 'button'%></p>
+  <div class='row'>
+    <div class='col-md-10'>
+      <h1>Welcome to GuitarBuilder</h1></br>
+      <p>Your one-stop shop for building, customizing, and ordering guitars</p></br>
+      <p><%= link_to 'New Order', new_order_path, class: 'btn btn-primary btn-lg', role: 'button'%></p>
+    </div>
+    <div class='col-md-2'>
+      <!-- http://findicons.com/icon/43064/fire_guitar?id=43071 -->
+      <%= image_tag('fire_guitar.png') %>
+    </div>
+  </div>
+
 </div>
