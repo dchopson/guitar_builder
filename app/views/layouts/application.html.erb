@@ -5,7 +5,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href=<%= image_path('wrench.ico') %>>
-  <title>GuitarBuilder - <%= yield(:title) %></title>
+  <title><%= "#{t('views.site_name')} - #{yield(:title)}" %></title>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -14,14 +14,14 @@
         <a class="navbar-brand" href="/">GuitarBuilder</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <%= form_tag(orders_status_path, method: 'post', class: 'navbar-form navbar-right') do %>
+        <%= form_tag(orders_status_path, method: 'get', class: 'navbar-form navbar-right') do %>
           <div class='form-group'>
-            <%= text_field_tag(:number, nil, class: 'form-control', placeholder: 'Order Number') %>
+            <%= text_field_tag(:number, nil, class: 'form-control', placeholder: t('views.order_number')) %>
           </div>
           <div class='form-group'>
-            <%= text_field_tag(:email, nil, class: 'form-control', placeholder: 'Email') %>
+            <%= text_field_tag(:email, nil, class: 'form-control', placeholder: t('views.email')) %>
           </div>
-          <%= submit_tag('Order Status', class: 'btn') %>
+          <%= submit_tag(t('views.order_status'), class: 'btn') %>
         <% end %>
       </div>
     </div>

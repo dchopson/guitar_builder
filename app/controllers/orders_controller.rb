@@ -22,13 +22,13 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  # POST /orders/status
+  # GET /orders/status
   def status
     order = Order.find_by number: params[:number], email: params[:email]
     if order
       redirect_to order
     else
-      redirect_to welcome_index_path, alert: 'No order found'
+      redirect_to welcome_index_path, alert: I18n.t('views.welcome.index.no_order_found')
     end
   end
 

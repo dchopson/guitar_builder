@@ -60,7 +60,18 @@ en:
         order_intro: Enter your shipping and billing details.
         ship: Your credit card will not be charged until your guitar ships.
         total_price: Total price
+        max_price_exceeded: You've exceeded your maximum price
+      index:
+        title: Orders
       new:
         intro: Ready to start your order? First choose a maximum price and we'll warn you if any options exceed it.
         max_price: Maximum Price
+        title: New Order
+    welcome:
+      index:
+        no_order_found: No order found
+        title: Welcome
     site_name: Guitar Builder
+    order_number: Order Number
+    email: Email
+    order_status: Order Status

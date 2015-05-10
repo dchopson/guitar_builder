@@ -24,7 +24,7 @@ class Order
     $priceWarning = $('#price-warning')
     max = @maxPrice.val()
     if max > 0 && total_price > max
-      $priceWarning.text("You've exceeded your maximum price")
+      $priceWarning.text(I18n.t('views.orders.form.max_price_exceeded'))
       $priceWarning.show()
     else
       $priceWarning.hide()
