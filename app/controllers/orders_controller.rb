@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :new, :create, :status]
 
   # GET /orders
   # GET /orders.json
@@ -38,8 +39,9 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     respond_to do |format|
+      redirect = current_user ? @order : welcome_index_path
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to redirect, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
