@@ -23,16 +23,6 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  # GET /orders/status
-  def status
-    order = Order.find_by number: params[:number], email: params[:email]
-    if order
-      redirect_to order
-    else
-      redirect_to welcome_index_path, alert: I18n.t('views.welcome.index.no_order_found')
-    end
-  end
-
   # POST /orders
   # POST /orders.json
   def create
@@ -78,7 +68,12 @@ class OrdersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_order
-    @order = Order.find(params[:id])
+    if params[:id] && current_user
+      @order = Order.find(params[:id])
+    else
+      @order = Order.find_by(number: params[:number], email: params[:email])
+    end
+    redirect_to welcome_index_path, alert: I18n.t('views.welcome.index.no_order_found') unless @order
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

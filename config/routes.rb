@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
 
-  get 'orders/status' => 'orders#status'
   resources :orders
+  get 'orders/status', to: 'orders#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
