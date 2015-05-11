@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id='notice'><%= notice %></p>
 
 <p>
   <strong>Number:</strong>
@@ -50,10 +50,12 @@
   <%= @order.cc_number %>
 </p>
 
-<!-- TODO only show for users -->
-<!-- <p>
-  <strong>User:</strong>
-  <%= @order.user %>
-</p> -->
+<% if current_user %>
+  <p>
+    <strong>User:</strong>
+    <%= @order.user %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

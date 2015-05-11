@@ -35,12 +35,12 @@
         <td><%= order.cc_number %></td>
         <td><%= order.user %></td>
         <td class='td-button'>
-          <div class="btn-group">
+          <div class='btn-group'>
             <%= link_to 'Show', order, role: 'button', class: 'btn btn-default' %>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <span class="caret"></span>
+            <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>
+              <span class='caret'></span>
             </button>
-            <ul class="dropdown-menu" role="menu">
+            <ul class='dropdown-menu' role='menu'>
               <li></li>
               <li><%= link_to 'Edit', edit_order_path(order) %></li>
               <li><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></li>
