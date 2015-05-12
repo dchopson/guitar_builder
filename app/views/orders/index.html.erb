@@ -2,6 +2,9 @@
 <% title t(:title, scope: i18n_scope) %>
 <h1>Orders</h1>
 
+<% show_link = params[:all] ? link_to('(My Orders)', orders_path) : link_to('(All Orders)', orders_path(all: true)) %>
+<p><%= show_link %></p>
+
 <table id='orders-table' class='table'>
   <thead>
     <tr>
@@ -11,10 +14,8 @@
       <th>Delivery type</th>
       <th>First name</th>
       <th>Last name</th>
-      <th>Address</th>
       <th>Telephone</th>
       <th>Email</th>
-      <th>Cc number</th>
       <th>User</th>
       <th></th>
     </tr>
@@ -29,20 +30,17 @@
         <td><%= order.delivery_type %></td>
         <td><%= order.first_name %></td>
         <td><%= order.last_name %></td>
-        <td><%= order.address %></td>
         <td><%= order.telephone %></td>
         <td><%= order.email %></td>
-        <td><%= order.cc_number %></td>
-        <td><%= order.user %></td>
+        <td><%= order.user.try(:name) %></td>
         <td class='td-button'>
           <div class='btn-group'>
-            <%= link_to 'Show', order, role: 'button', class: 'btn btn-default' %>
+            <%= link_to 'Edit', edit_order_path(order), role: 'button', class: 'btn btn-default' %>
             <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>
               <span class='caret'></span>
             </button>
             <ul class='dropdown-menu' role='menu'>
               <li></li>
-              <li><%= link_to 'Edit', edit_order_path(order) %></li>
               <li><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></li>
             </ul>
           </div>
@@ -53,5 +51,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Order', new_order_path %>

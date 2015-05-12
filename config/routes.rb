@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'user/root', to: 'orders#index'
+
   get 'welcome/index'
 
   resources :orders

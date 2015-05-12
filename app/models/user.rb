@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
+
+  #TODO spec
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

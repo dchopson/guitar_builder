@@ -5,7 +5,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    #TODO spec
+    @orders = params[:all] ? Order.all : Order.for_user(current_user.id)
   end
 
   # GET /orders/1

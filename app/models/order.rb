@@ -21,6 +21,7 @@ class Order < ActiveRecord::Base
   scope :pending, -> { where(status: STATUSES[:pending]) }
   scope :in_progress, -> { where(status: STATUSES[:in_progress]) }
   scope :created_today, -> { where(created_at: Date.today) }
+  scope :for_user, ->(user_id) { where(user_id: user_id) } #TODO spec
 
   after_initialize :set_completion_date
   before_create :set_status, :set_number
