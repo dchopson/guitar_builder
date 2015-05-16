@@ -1,54 +1,6 @@
-<p id='notice'><%= notice %></p>
+<% i18n_scope = [:views, :orders, :show] %>
 
-<p>
-  <strong>Number:</strong>
-  <%= @order.number %>
-</p>
+<% title t(:title, scope: i18n_scope, number: @order.number) %>
+<h1><%= t(:title, scope: i18n_scope, number: @order.number) %></h1>
 
-<p>
-  <strong>Completion date:</strong>
-  <%= @order.completion_date %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @order.status %>
-</p>
-
-<p>
-  <strong>Delivery type:</strong>
-  <%= @order.delivery_type %>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @order.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @order.last_name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @order.address %>
-</p>
-
-<p>
-  <strong>Telephone:</strong>
-  <%= @order.telephone %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @order.email %>
-</p>
-
-<p>
-  <strong>Cc number:</strong>
-  <%= @order.cc_number %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= render 'form' %>

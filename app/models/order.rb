@@ -31,6 +31,10 @@ class Order < ActiveRecord::Base
     order_const.map{|_,v| v}
   end
 
+  def cc_number_masked
+    cc_number[0..-4].gsub(/./,'*') + cc_number[-4,4]
+  end
+
   private
 
   def set_completion_date

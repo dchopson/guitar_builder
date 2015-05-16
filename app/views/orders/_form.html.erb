@@ -29,101 +29,109 @@
     </div>
   <% end %>
 
-  <div class='panel panel-default'>
-    <div class='panel panel-heading'>
-      <h3><%= t(:guitar_intro, scope: i18n_scope) %></h3>
+  <fieldset <%= 'disabled' if @readonly %>>
+    <div class='panel panel-default'>
+      <div class='panel panel-heading'>
+        <h3><%= t(@readonly ? :guitar_intro_alt : :guitar_intro, scope: i18n_scope) %></h3>
+      </div>
+      <div class='panel panel-body'>
+        <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
+          <div class='row'>
+            <div class='col-md-4'>
+              <%= g.guitar_select(:body_style) %>
+            </div>
+            <div class='col-md-4'>
+              <%= g.guitar_select(:body_wood) %>
+            </div>
+            <div class='col-md-4'>
+              <%= g.guitar_select(:body_finish) %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-6'>
+              <%= g.guitar_select(:fretboard_wood) %>
+            </div>
+            <div class='col-md-6'>
+              <%= g.guitar_select(:fretboard_finish) %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-6'>
+              <%= g.guitar_select(:neck_wood) %>
+            </div>
+            <div class='col-md-6'>
+              <%= g.guitar_select(:neck_finish) %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-6'>
+              <%= g.guitar_select(:tuning_peg_style) %>
+            </div>
+            <div class='col-md-6'>
+              <%= g.guitar_select(:tuning_peg_layout) %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>
+              <%= g.guitar_select(:string_type) %>
+            </div>
+            <div class='col-md-4'>
+              <%= g.guitar_checkbox(:fretboard_markers) %>
+            </div>
+            <div class='col-md-4'>
+              <%= g.guitar_checkbox(:pick_guard) %>
+            </div>
+          </div>
+          <div class='form-group'>
+            <%= g.label t(:total_price, scope: i18n_scope) %>
+            <div class='form-control' disabled='disabled'>
+              <span id='total_price'></span>
+            </div>
+          </div>
+          <div id='price-warning' class='alert alert-warning form-group' role='alert' hidden></div>
+        <% end %>
+      </div>
     </div>
-    <div class='panel panel-body'>
-      <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
+
+    <div class='panel panel-default'>
+      <div class='panel panel-heading'>
+        <h3><%= t(@readonly ? :order_intro_alt : :order_intro, scope: i18n_scope) %></h3>
+      </div>
+      <div class='panel panel-body'>
+        <%= f.order_select(:delivery_type) %>
+        <p id='ship' hidden><%= t(:ship, scope: i18n_scope) %></p>
+        <p id='local'><%= t(:local, hold_fee: number_to_currency(Order.hold_fee), scope: i18n_scope) %></p>
         <div class='row'>
-          <div class='col-md-4'>
-            <%= g.guitar_select(:body_style) %>
+          <div class='col-md-3'>
+            <%= f.order_text_field(:first_name) %>
           </div>
-          <div class='col-md-4'>
-            <%= g.guitar_select(:body_wood) %>
+          <div class='col-md-3'>
+            <%= f.order_text_field(:last_name) %>
           </div>
-          <div class='col-md-4'>
-            <%= g.guitar_select(:body_finish) %>
+          <div class='col-md-6'>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            <%= g.guitar_select(:fretboard_wood) %>
-          </div>
-          <div class='col-md-6'>
-            <%= g.guitar_select(:fretboard_finish) %>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            <%= g.guitar_select(:neck_wood) %>
-          </div>
-          <div class='col-md-6'>
-            <%= g.guitar_select(:neck_finish) %>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            <%= g.guitar_select(:tuning_peg_style) %>
-          </div>
-          <div class='col-md-6'>
-            <%= g.guitar_select(:tuning_peg_layout) %>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <%= g.guitar_select(:string_type) %>
-          </div>
-          <div class='col-md-4'>
-            <%= g.guitar_checkbox(:fretboard_markers) %>
-          </div>
-          <div class='col-md-4'>
-            <%= g.guitar_checkbox(:pick_guard) %>
-          </div>
-        </div>
+
+        <%= f.order_text_area(:address) %>
+        <%= f.order_text_field(:telephone) %>
+        <%= f.order_text_field(:email) %>
+        <% if @readonly %>
+          <%= f.order_text_field(:cc_number_masked) %>
+        <% else %>
+          <%= f.order_text_field(:cc_number) %>
+        <% end %>
         <div class='form-group'>
-          <%= g.label t(:total_price, scope: i18n_scope) %>
-          <div class='form-control' disabled='disabled'>
-            <span id='total_price'></span>
-          </div>
-        </div>
-        <div id='price-warning' class='alert alert-warning form-group' role='alert' hidden></div>
-      <% end %>
-    </div>
-  </div>
-
-  <div class='panel panel-default'>
-    <div class='panel panel-heading'>
-      <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
-    </div>
-    <div class='panel panel-body'>
-      <%= f.order_select(:delivery_type) %>
-      <p id='ship' hidden><%= t(:ship, scope: i18n_scope) %></p>
-      <p id='local'><%= t(:local, hold_fee: number_to_currency(Order.hold_fee), scope: i18n_scope) %></p>
-      <div class='row'>
-        <div class='col-md-3'>
-          <%= f.order_text_field(:first_name) %>
-        </div>
-        <div class='col-md-3'>
-          <%= f.order_text_field(:last_name) %>
-        </div>
-        <div class='col-md-6'>
+          <%= f.label :completion_date %><br>
+          <%= f.date_field :completion_date, disabled: true, class: 'form-control' %>
         </div>
       </div>
-
-      <%= f.order_text_area(:address) %>
-      <%= f.order_text_field(:telephone) %>
-      <%= f.order_text_field(:email) %>
-      <%= f.order_text_field(:cc_number) %>
-      <div class='form-group'>
-        <%= f.label :completion_date %><br>
-        <%= f.date_field :completion_date, disabled: true, class: 'form-control' %>
-      </div>
     </div>
-  </div>
+  </fieldset>
 
   <%= f.hidden_field :lock_version %><br>
-  <div class='actions panel'>
-    <%= f.submit(class: 'btn btn-success') %>
-  </div>
+  <% unless @readonly %>
+    <div class='actions panel'>
+      <%= f.submit(class: 'btn btn-success') %>
+    </div>
+  <% end %>
 <% end %>
