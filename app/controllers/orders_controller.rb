@@ -5,8 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    #TODO spec
-    @orders = params[:all] ? Order.all : Order.for_user(current_user.id)
+    @orders = Order.all
   end
 
   # GET /orders/1
@@ -60,7 +59,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_path, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

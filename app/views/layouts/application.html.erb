@@ -16,6 +16,9 @@
       <div id='navbar' class='navbar-collapse collapse'>
         <ul class='nav navbar-nav'>
           <li><%= link_to(t('views.orders.new.title'), new_order_path) %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to('All Orders', orders_path) %></li>
+          <% end %>
           <li class='dropdown'>
             <%= link_to(t('views.more').html_safe, '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'}, role: 'button') %>
             <ul class='dropdown-menu' role='menu'>
@@ -28,13 +31,11 @@
         </ul>
         <% if user_signed_in? %>
           <div class='btn-group navbar-btn navbar-right'>
-            <%= link_to(current_user.name, edit_user_registration_path, role: 'button', class: 'btn btn-default') %>
-            <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>
-              <span class='caret'></span>
+            <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>
+              <%= current_user.name %> <span class='caret'></span>
             </button>
             <ul class='dropdown-menu' role='menu'>
-              <li></li>
-              <li><%= link_to('My Orders', orders_path) %></li>
+              <li><%= link_to('Account', edit_user_registration_path) %></li>
               <li><%= link_to('Log Out', destroy_user_session_path) %></li>
             </ul>
           </div>

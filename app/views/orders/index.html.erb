@@ -2,9 +2,6 @@
 <% title t(:title, scope: i18n_scope) %>
 <h1>Orders</h1>
 
-<% show_link = params[:all] ? link_to('(My Orders)', orders_path) : link_to('(All Orders)', orders_path(all: true)) %>
-<p><%= show_link %></p>
-
 <table id='orders-table' class='table'>
   <thead>
     <tr>
@@ -23,7 +20,7 @@
 
   <tbody>
     <% @orders.each do |order| %>
-      <tr>
+      <tr <%= 'class=info' if order.user == current_user %>>
         <td><%= order.number %></td>
         <td><%= order.completion_date %></td>
         <td><%= order.status %></td>
