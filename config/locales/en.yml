@@ -54,6 +54,8 @@ en:
         pending: Pending
   views:
     orders:
+      edit:
+        title: 'Edit Order # %{number}'
       form:
         guitar_intro: Use the options below to customize your guitar.
         local: Your credit card will be charged a %{hold_fee} hold fee until you pick up your guitar.
@@ -61,6 +63,8 @@ en:
         ship: Your credit card will not be charged until your guitar ships.
         total_price: Total price
         max_price_exceeded: You've exceeded your maximum price
+        employee:
+          intro: Employee-Only Details
       index:
         title: Orders
       new:

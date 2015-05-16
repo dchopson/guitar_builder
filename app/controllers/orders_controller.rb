@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     respond_to do |format|
-      redirect = current_user ? @order : welcome_index_path
+      redirect = user_signed_in? ? orders_path : welcome_index_path
       if @order.save
         format.html { redirect_to redirect, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_path, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_order
-    if params[:id] && current_user
+    if params[:id] && user_signed_in?
       @order = Order.find(params[:id])
     else
       @order = Order.find_by(number: params[:number], email: params[:email])

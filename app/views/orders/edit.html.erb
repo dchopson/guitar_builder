@@ -1,6 +1,6 @@
-<h1>Editing order</h1>
+<% i18n_scope = [:views, :orders, :edit] %>
+
+<% title t(:title, scope: i18n_scope, number: @order.number) %>
+<h1><%= t(:title, scope: i18n_scope, number: @order.number) %></h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @order %> |
-<%= link_to 'Back', orders_path %>

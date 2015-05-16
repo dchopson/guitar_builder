@@ -11,6 +11,16 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def user_select(label, order_user)
+    tags = ''
+    User.all.each do |u|
+      tags += @template.content_tag(:option, u.name, value: u.id, selected: u == order_user)
+    end
+    tag_with_label(label) do
+      @template.select(@object_name, label, nil, {}, {class: 'form-control'}) { tags.html_safe }
+    end
+  end
+
   def guitar_checkbox(label)
     tag_with_label("#{label.to_s}?") do
       @template.check_box(@object_name, label)

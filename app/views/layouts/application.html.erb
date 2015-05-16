@@ -26,7 +26,7 @@
             </ul>
           </li>
         </ul>
-        <% if current_user %>
+        <% if user_signed_in? %>
           <div class='btn-group navbar-btn navbar-right'>
             <%= link_to(current_user.name, edit_user_registration_path, role: 'button', class: 'btn btn-default') %>
             <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>

@@ -50,12 +50,5 @@
   <%= @order.cc_number %>
 </p>
 
-<% if current_user %>
-  <p>
-    <strong>User:</strong>
-    <%= @order.user %>
-  </p>
-<% end %>
-
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
