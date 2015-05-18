@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @readonly = !user_signed_in?
   end
 
   # GET /orders/new

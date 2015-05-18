@@ -1,6 +1,6 @@
 <% i18n_scope = [:views, :orders, :index] %>
 <% title t(:title, scope: i18n_scope) %>
-<h1>Orders</h1>
+<h1><%= t(:title, scope: i18n_scope) %></h1>
 
 <table id='orders-table' class='table'>
   <thead>
@@ -37,8 +37,7 @@
               <span class='caret'></span>
             </button>
             <ul class='dropdown-menu' role='menu'>
-              <li></li>
-              <li><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+              <li><%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' } %></li>
             </ul>
           </div>
         </td>

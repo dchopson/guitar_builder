@@ -13,26 +13,26 @@
     </div>
   <% end %>
 
-  <% if user_signed_in? %>
-    <div class='panel panel-default'>
-      <div class='panel panel-heading'>
-        <h3><%= t('employee.intro', scope: i18n_scope) %></h3>
-      </div>
-      <div class='panel panel-body'>
-        <%= f.user_select(:user_id, @order.user) %>
-        <%= f.order_select(:status) %>
-        <div class='form-group'>
-          <%= f.label :completion_date %><br>
-          <%= f.date_field :completion_date, class: 'form-control' %>
+  <fieldset <%= 'disabled' if viewing? %>>
+    <% if user_signed_in? %>
+      <div class='panel panel-default'>
+        <div class='panel panel-heading'>
+          <h3><%= t('employee.intro', scope: i18n_scope) %></h3>
+        </div>
+        <div class='panel panel-body'>
+          <%= f.user_select(:user_id, @order.user) %>
+          <%= f.order_select(:status) %>
+          <div class='form-group'>
+            <%= f.label :completion_date %><br>
+            <%= f.date_field :completion_date, class: 'form-control' %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <fieldset <%= 'disabled' if @readonly %>>
     <div class='panel panel-default'>
       <div class='panel panel-heading'>
-        <h3><%= t(@readonly ? :guitar_intro_alt : :guitar_intro, scope: i18n_scope) %></h3>
+        <h3><%= t(viewing? || editing? ? :guitar_intro_alt : :guitar_intro, scope: i18n_scope) %></h3>
       </div>
       <div class='panel panel-body'>
         <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
@@ -95,7 +95,7 @@
 
     <div class='panel panel-default'>
       <div class='panel panel-heading'>
-        <h3><%= t(@readonly ? :order_intro_alt : :order_intro, scope: i18n_scope) %></h3>
+        <h3><%= t(viewing? || editing? ? :order_intro_alt : :order_intro, scope: i18n_scope) %></h3>
       </div>
       <div class='panel panel-body'>
         <%= f.order_select(:delivery_type) %>
@@ -115,7 +115,7 @@
         <%= f.order_text_area(:address) %>
         <%= f.order_text_field(:telephone) %>
         <%= f.order_text_field(:email) %>
-        <% if @readonly %>
+        <% if viewing? %>
           <%= f.order_text_field(:cc_number_masked) %>
         <% else %>
           <%= f.order_text_field(:cc_number) %>
@@ -129,7 +129,7 @@
   </fieldset>
 
   <%= f.hidden_field :lock_version %><br>
-  <% unless @readonly %>
+  <% unless viewing? %>
     <div class='actions panel'>
       <%= f.submit(class: 'btn btn-success') %>
     </div>
