@@ -80,6 +80,7 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(
     :number,
+    :price,
     :completion_date,
     :status,
     :delivery_type,
@@ -88,7 +89,8 @@ class OrdersController < ApplicationController
     :address,
     :telephone,
     :email,
-    :cc_number,
+    :express_token,
+    :express_payer_id,
     :user_id,
     :lock_version,
     guitars_attributes: [

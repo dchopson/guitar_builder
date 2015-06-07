@@ -16,14 +16,14 @@ class Order
     @deliveryType.on('change', @toggleDelivery)
 
   updatePrice: =>
-    total_price = 0
+    order_price = 0
     @guitarSelects.each ->
-      total_price += $(@).find('option:selected').data('price')
-    $('#total_price').text(I18n.t('number.currency.format.unit') + total_price)
+      order_price += $(@).find('option:selected').data('price')
+    $('#order_price').val(order_price)
 
     $priceWarning = $('#price-warning')
     max = @maxPrice.val()
-    if max > 0 && total_price > max
+    if max > 0 && order_price > max
       $priceWarning.text(I18n.t('views.orders.form.max_price_exceeded'))
       $priceWarning.show()
     else

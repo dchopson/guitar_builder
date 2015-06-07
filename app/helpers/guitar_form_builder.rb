@@ -7,7 +7,7 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
       tags += @template.content_tag(:option, a[:value], value: a[:value], data: a[:data])
     end
     tag_with_label(label) do
-      @template.select(@object_name, label, nil, {}, {class: 'form-control'}) { tags.html_safe }
+      @template.select(@object_name, label, nil, {}, options) { tags.html_safe }
     end
   end
 
@@ -17,7 +17,7 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
       tags += @template.content_tag(:option, u.name, value: u.id, selected: u == order_user)
     end
     tag_with_label(label) do
-      @template.select(@object_name, label, nil, {}, {class: 'form-control'}) { tags.html_safe }
+      @template.select(@object_name, label, nil, {}, options) { tags.html_safe }
     end
   end
 
@@ -29,19 +29,21 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
 
   def order_select(label)
     tag_with_label(label) do
-      @template.select(@object_name, label, Order.send(label.to_s.pluralize), {}, {class: 'form-control'})
+      @template.select(@object_name, label, Order.send(label.to_s.pluralize), {}, options)
     end
   end
 
-  def order_text_field(label)
+  def order_text_field(label, readonly=false)
     tag_with_label(label) do
-      @template.text_field(@object_name, label, class: 'form-control')
+      opts = readonly ? options.merge(readonly: 'readonly') : options
+      @template.text_field(@object_name, label, opts)
     end
   end
 
   def order_text_area(label)
     tag_with_label(label) do
-      @template.text_area(@object_name, label, rows: 4, class: 'form-control')
+      opts = options.merge(rows: 4)
+      @template.text_area(@object_name, label, opts)
     end
   end
 
@@ -53,5 +55,9 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
       result += yield
       result.html_safe
     end
+  end
+
+  def options
+    {class: 'form-control'}
   end
 end

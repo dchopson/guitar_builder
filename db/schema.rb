@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20150510174642) do
     t.datetime "updated_at"
   end
 
-  add_index "guitars", ["order_id"], name: "index_guitars_on_order_id"
+  add_index "guitars", ["order_id"], name: "index_guitars_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.string   "number"
+    t.decimal  "price",            precision: 10, scale: 0
     t.date     "completion_date"
     t.string   "status"
     t.string   "delivery_type"
@@ -43,14 +44,15 @@ ActiveRecord::Schema.define(version: 20150510174642) do
     t.string   "address"
     t.string   "telephone"
     t.string   "email"
-    t.string   "cc_number"
+    t.string   "express_token"
+    t.string   "express_payer_id"
     t.integer  "user_id"
-    t.integer  "lock_version",    default: 0
+    t.integer  "lock_version",                              default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -69,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150510174642) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

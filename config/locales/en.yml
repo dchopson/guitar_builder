@@ -3,7 +3,6 @@ en:
   activerecord:
     attributes:
       order:
-        cc_number: Credit Card Number
         completion_date: Estimated Completion Date
   models:
     guitar:
