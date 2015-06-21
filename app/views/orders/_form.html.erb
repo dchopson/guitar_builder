@@ -85,12 +85,45 @@
         <% end %>
         <%= f.order_text_field(:price, true) %>
         <div id='price-warning' class='alert alert-warning form-group' role='alert' hidden></div>
+        <div class='form-group'>
+          <%= f.label :completion_date %><br>
+          <%= f.date_field :completion_date, disabled: true, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <%# TODO delivery type, different heading for new vs viewing, don't require email for new %>
+    <div class='panel panel-default'>
+      <div class='panel panel-heading'>
+        <h3><%= t(viewing? || editing? ? :order_intro_alt : :order_intro, scope: i18n_scope) %></h3>
+      </div>
+      <div class='panel panel-body'>
+        <% if @order.paid? %>
+          <div class='row'>
+            <div class='col-md-3'>
+              <%= f.order_text_field(:first_name) %>
+            </div>
+            <div class='col-md-3'>
+              <%= f.order_text_field(:last_name) %>
+            </div>
+            <div class='col-md-6'>
+            </div>
+          </div>
+
+          <%= f.order_text_area(:address) %>
+          <%= f.order_text_field(:telephone) %>
+          <%= f.order_text_field(:email) %>
+        <% elsif creating? %>
+          <%= f.order_text_field(:email) %>
+        <% else %>
+          <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_new_order_path(number: @order.number, email: @order.email) %>
+        <% end %>
       </div>
     </div>
   </fieldset>
 
   <%= f.hidden_field :lock_version %><br>
-  <% unless viewing? %>
+  <% if editing? %>
     <div class='actions panel'>
       <%= f.submit(class: 'btn btn-success') %>
     </div>

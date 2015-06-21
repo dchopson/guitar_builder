@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  resources :orders
-  get 'orders/status', to: 'orders#show'
+  resources :orders do
+    get 'express', on: :new
+  end
+  post 'orders/status', to: 'orders#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

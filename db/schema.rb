@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150510174642) do
     t.string   "email"
     t.string   "express_token"
     t.string   "express_payer_id"
+    t.datetime "purchased_at"
     t.integer  "user_id"
     t.integer  "lock_version",                              default: 0
     t.datetime "created_at"

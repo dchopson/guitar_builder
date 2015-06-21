@@ -40,7 +40,7 @@
             </ul>
           </div>
         <% else %>
-          <%= form_tag(orders_status_path, method: 'get', class: 'navbar-form navbar-right') do %>
+          <%= form_tag(orders_status_path, class: 'navbar-form navbar-right') do %>
             <div class='form-group'>
               <%= text_field_tag(:number, nil, class: 'form-control', placeholder: t('views.order_number')) %>
             </div>

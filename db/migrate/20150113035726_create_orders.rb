@@ -13,6 +13,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :email
       t.string :express_token
       t.string :express_payer_id
+      t.datetime :purchased_at
       t.references :user, index: true
       t.integer :lock_version, default: 0
 

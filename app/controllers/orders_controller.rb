@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :new, :create, :status]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :express]
+  before_action :authenticate_user!, except: [:show, :new, :create, :status, :express]
+  before_action :handle_express_token, only: :show
 
   # GET /orders
   # GET /orders.json
@@ -11,6 +12,15 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+  end
+
+  def express
+    response = EXPRESS_GATEWAY.setup_purchase(@order.price_in_cents,
+      :ip                => request.remote_ip,
+      :return_url        => orders_status_url(number: @order.number, email: @order.email),
+      :cancel_return_url => welcome_index_url
+    )
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
   # GET /orders/new
@@ -29,9 +39,9 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     respond_to do |format|
-      redirect = user_signed_in? ? orders_path : welcome_index_path
       if @order.save
-        format.html { redirect_to redirect, notice: 'Order was successfully created.' }
+        redirect = user_signed_in? ? @order : orders_status_path(number: @order.number, email: @order.email)
+        format.html { redirect_to redirect }#, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -74,6 +84,13 @@ class OrdersController < ApplicationController
       @order = Order.find_by(number: params[:number], email: params[:email])
     end
     redirect_to welcome_index_path, alert: I18n.t('views.welcome.index.no_order_found') unless @order
+  end
+
+  def handle_express_token
+    if params[:token] && !@order.paid?
+      @order.update_attribute(:express_token, params[:token])
+      @order.purchase!
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
