@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
-  #TODO spec
   def name
     "#{first_name} #{last_name}"
   end

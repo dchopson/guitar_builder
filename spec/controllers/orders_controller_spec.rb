@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, :type => :controller do
-  let(:order) { mock_model(Order, id: 1) }
+  let(:order) do
+    mock_model(Order,
+               id: 1,
+               number: '1234',
+               email: 'email@example.com',
+               price_in_cents: 5000,
+               paid?: false)
+  end
   let(:address) { '123 Main St.' }
 
   context 'user logged in' do
@@ -32,10 +39,32 @@ RSpec.describe OrdersController, :type => :controller do
     end
 
     describe '#show' do
-      it 'responds successfully' do
+      before :each do
         allow(Order).to receive(:find).and_return(order)
+      end
+
+      it 'responds successfully' do
         get :show, id: order
         expect(response).to be_success
+      end
+
+      context 'when there is an express token and the order is not paid' do
+        let(:token) { '1234' }
+
+        it 'completes the purchase' do
+          expect(order).to receive(:update_attribute).with(:express_token, token)
+          expect(order).to receive(:purchase!)
+          get :show, id: order, token: token
+        end
+      end
+    end
+
+    describe '#express' do
+      it 'sets up the purchase & redirects' do
+        allow(Order).to receive(:find).and_return(order)
+        expect(EXPRESS_GATEWAY).to receive(:setup_purchase).and_return(double(token: 1234))
+        expect(EXPRESS_GATEWAY).to receive(:redirect_url_for).and_return(orders_path)
+        get :express, id: order
       end
     end
 
@@ -93,9 +122,9 @@ RSpec.describe OrdersController, :type => :controller do
       end
 
       context 'success' do
-        it 'redirects to order_path' do
+        it 'redirects to orders_path' do
           patch :update, id: order, order: { address: order.address }
-          expect(response).to redirect_to(order_path(assigns(:order)))
+          expect(response).to redirect_to(orders_path)
         end
       end
 
