@@ -5,18 +5,11 @@ class Order < ActiveRecord::Base
 
   i18n_scope = [:models, :order]
 
-  DELIVERY_TYPES = {
-    local: I18n.t('delivery_types.local', scope: i18n_scope),
-    ship: I18n.t('delivery_types.ship', scope: i18n_scope)
-  }
-
   STATUSES = {
     complete: I18n.t('statuses.complete', scope: i18n_scope),
     in_progress: I18n.t('statuses.in_progress', scope: i18n_scope),
     pending: I18n.t('statuses.pending', scope: i18n_scope)
   }
-
-  HOLD_FEE = 50
 
   scope :pending, -> { where(status: STATUSES[:pending]) }
   scope :in_progress, -> { where(status: STATUSES[:in_progress]) }

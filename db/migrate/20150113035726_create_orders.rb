@@ -5,7 +5,6 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :price
       t.date :completion_date
       t.string :status
-      t.string :delivery_type
       t.string :first_name
       t.string :last_name
       t.string :address

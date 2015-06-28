@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20150510174642) do
     t.decimal  "price",            precision: 10, scale: 0
     t.date     "completion_date"
     t.string   "status"
-    t.string   "delivery_type"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"

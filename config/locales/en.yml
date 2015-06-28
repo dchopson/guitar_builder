@@ -44,9 +44,6 @@ en:
       neck_woods:
         <<: *woods
     order:
-      delivery_types:
-        local: Local Pick-Up
-        ship: Ship
       statuses:
         complete: Complete
         in_progress: In Progress
@@ -58,10 +55,8 @@ en:
       form:
         guitar_intro: Use the options below to customize your guitar.
         guitar_intro_alt: Guitar Options
-        local: Your credit card will be charged a %{hold_fee} hold fee until you pick up your guitar.
         order_intro: Shipping and Billing Details
         email_intro: Enter your email address so you can look up your order later
-        ship: Your credit card will not be charged until your guitar ships.
         total_price: Total price
         max_price_exceeded: You've exceeded your maximum price
         employee:

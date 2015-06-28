@@ -30,20 +30,13 @@ RSpec.describe Order, :type => :model do
   end
 
   describe '.method_missing' do
-    context 'single-value constants' do
-      it 'allows them to be called as methods' do
-        expect(described_class.hold_fee).to eq(Order::HOLD_FEE)
-      end
-    end
-
-    context 'hash constants' do
-      it 'allows them to be called as methods & returns an array of values' do
-        i18n_scope = [:models, :order]
-        expect(described_class.delivery_types).to eq([
-          I18n.t('delivery_types.local', scope: i18n_scope),
-          I18n.t('delivery_types.ship', scope: i18n_scope)
-        ])
-      end
+    it 'allows hash constants to be called as methods & returns an array of values' do
+      i18n_scope = [:models, :order]
+      expect(described_class.statuses).to eq([
+        I18n.t('statuses.complete', scope: i18n_scope),
+        I18n.t('statuses.in_progress', scope: i18n_scope),
+        I18n.t('statuses.pending', scope: i18n_scope)
+      ])
     end
   end
 end

@@ -100,7 +100,6 @@ class OrdersController < ApplicationController
     :price,
     :completion_date,
     :status,
-    :delivery_type,
     :first_name,
     :last_name,
     :address,
