@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        redirect = user_signed_in? ? @order : orders_status_path(number: @order.number, email: @order.email)
+        redirect = user_signed_in? ? @order : express_new_order_path(number: @order.number, email: @order.email)
         format.html { redirect_to redirect }#, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -76,18 +76,18 @@ class OrdersController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_order
-    if params[:id] && user_signed_in?
+    if params[:id].present? && user_signed_in?
       @order = Order.find(params[:id])
-    else
+    elsif params[:number].present? && params[:email].present?
       @order = Order.find_by(number: params[:number], email: params[:email])
+    else
+      redirect_to welcome_index_path, alert: I18n.t('views.welcome.index.no_order_found')
     end
-    redirect_to welcome_index_path, alert: I18n.t('views.welcome.index.no_order_found') unless @order
   end
 
   def handle_express_token
-    if params[:token] && !@order.paid?
+    if params[:token].present? && !@order.paid?
       @order.update_attribute(:express_token, params[:token])
       @order.purchase!
     end

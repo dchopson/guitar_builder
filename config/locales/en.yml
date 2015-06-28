@@ -59,8 +59,8 @@ en:
         guitar_intro: Use the options below to customize your guitar.
         guitar_intro_alt: Guitar Options
         local: Your credit card will be charged a %{hold_fee} hold fee until you pick up your guitar.
-        order_intro: Enter your shipping and billing details.
-        order_intro_alt: Shipping and Billing Details
+        order_intro: Shipping and Billing Details
+        email_intro: Enter your email address so you can look up your order later
         ship: Your credit card will not be charged until your guitar ships.
         total_price: Total price
         max_price_exceeded: You've exceeded your maximum price

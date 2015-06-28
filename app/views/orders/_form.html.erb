@@ -92,13 +92,13 @@
       </div>
     </div>
 
-    <%# TODO delivery type, different heading for new vs viewing, don't require email for new %>
-    <div class='panel panel-default'>
-      <div class='panel panel-heading'>
-        <h3><%= t(viewing? || editing? ? :order_intro_alt : :order_intro, scope: i18n_scope) %></h3>
-      </div>
-      <div class='panel panel-body'>
-        <% if @order.paid? %>
+    <%# TODO delivery type, don't require email for new %>
+    <% if @order.paid? || editing? %>
+      <div class='panel panel-default'>
+        <div class='panel panel-heading'>
+          <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
+        </div>
+        <div class='panel panel-body'>
           <div class='row'>
             <div class='col-md-3'>
               <%= f.order_text_field(:first_name) %>
@@ -110,22 +110,31 @@
             </div>
           </div>
 
-          <%= f.order_text_area(:address) %>
+          <%= f.order_text_field(:address) %>
           <%= f.order_text_field(:telephone) %>
           <%= f.order_text_field(:email) %>
-        <% elsif creating? %>
-          <%= f.order_text_field(:email) %>
-        <% else %>
-          <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_new_order_path(number: @order.number, email: @order.email) %>
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class='panel panel-default'>
+        <div class='panel panel-heading'>
+          <h3><%= t(:email_intro, scope: i18n_scope) %></h3>
+        </div>
+        <div class='panel panel-body'>
+          <%= f.order_text_field(:email) %>
+        </div>
+      </div>
+    <% end %>
   </fieldset>
 
   <%= f.hidden_field :lock_version %><br>
-  <% if editing? %>
+  <% if editing? || creating? %>
     <div class='actions panel'>
-      <%= f.submit(class: 'btn btn-success') %>
+      <% if @order.paid? %>
+        <%= f.submit(class: 'btn btn-success') %>
+      <% else %>
+        <%= f.submit(type: :image, src: 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %>
+      <% end %>
     </div>
   <% end %>
 <% end %>

@@ -44,9 +44,16 @@ class Order < ActiveRecord::Base
     if token.present?
       details = EXPRESS_GATEWAY.details_for(token)
       self.express_payer_id = details.payer_id
-      self.first_name = details.params['first_name']
-      self.last_name = details.params['last_name']
-      #TODO address, telephone
+
+      params = details.params.with_indifferent_access
+      # self.email = params[:payer]
+      self.first_name = params[:first_name]
+      self.last_name = params[:last_name]
+      self.telephone = params[:phone]
+      self.address = "#{params[:street1]}; "\
+        "#{"#{params[:street2]}; " if params[:street2]}"\
+        "#{params[:city_name]}, #{params[:state_or_province]} #{params[:postal_code]}; "\
+        "#{params[:country_name]}"
     end
   end
 
