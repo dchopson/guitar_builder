@@ -8,9 +8,26 @@ RSpec.describe Guitar, :type => :model do
   describe '.method_missing' do
     it 'allows hash constants to be called as methods & returns an array of values' do
       expect(described_class.body_styles).to include({
-        value: I18n.t('models.guitar.body_styles.cutaway'),
+        text: I18n.t('models.guitar.body_styles.cutaway'),
+        value: :cutaway,
         data: {price: 10}
       })
+    end
+  end
+
+  describe '#total_of_selected' do
+    it 'returns the total price of selected options' do
+      subject.body_style = :cutaway
+      subject.body_wood = :cherry
+      subject.body_finish = :raw
+      subject.fretboard_wood = :black_cherry
+      subject.fretboard_finish = :raw
+      subject.neck_wood = :pine
+      subject.neck_finish = :gloss
+      subject.tuning_peg_style = :square
+      subject.tuning_peg_layout = :one_side
+      subject.string_type = :steel
+      expect(subject.total_of_selected).to eq 90
     end
   end
 end

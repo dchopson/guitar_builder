@@ -18,6 +18,8 @@ class Order < ActiveRecord::Base
   after_initialize :set_completion_date
   before_create :set_status, :set_number
 
+  validate :price_matches_options
+
   def self.method_missing(method, *args)
     order_const = Order.const_get(method.upcase)
     return order_const unless order_const.is_a?(Hash)
@@ -74,6 +76,13 @@ class Order < ActiveRecord::Base
     random.gsub('-', 'a')
     random.gsub('_', '9')
     self.number = random.upcase
+  end
+
+  # TODO assumes 1 guitar per order
+  def price_matches_options
+    unless guitars.all? {|g| g.total_of_selected == price}
+      errors.add(:price, 'does not match selected options')
+    end
   end
 
   def process_purchase

@@ -4,7 +4,7 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
   def guitar_select(label)
     tags = ''
     Guitar.send(label.to_s.pluralize).each do |a|
-      tags += @template.content_tag(:option, a[:value], value: a[:value], data: a[:data])
+      tags += @template.content_tag(:option, a[:text], value: a[:value], data: a[:data])
     end
     tag_with_label(label) do
       @template.select(@object_name, label, nil, {}, options) { tags.html_safe }

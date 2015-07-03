@@ -54,9 +54,23 @@ class Guitar < ActiveRecord::Base
     guitar_const = Guitar.const_get(method.upcase)
     guitar_const.map do |k,v|
       {
-        value: I18n.t("#{method}.#{k}", scope: [:models, :guitar]),
+        text: I18n.t("#{method}.#{k}", scope: [:models, :guitar]),
+        value: k,
         data: {price: v}
       }
     end
+  end
+
+  def total_of_selected
+    BODY_STYLES[body_style.to_sym] +
+    BODY_WOODS[body_wood.to_sym] +
+    BODY_FINISHES[body_finish.to_sym] +
+    FRETBOARD_WOODS[fretboard_wood.to_sym] +
+    FRETBOARD_FINISHES[fretboard_finish.to_sym] +
+    NECK_WOODS[neck_wood.to_sym] +
+    NECK_FINISHES[neck_finish.to_sym] +
+    TUNING_PEG_STYLES[tuning_peg_style.to_sym] +
+    TUNING_PEG_LAYOUTS[tuning_peg_layout.to_sym] +
+    STRING_TYPES[string_type.to_sym]
   end
 end

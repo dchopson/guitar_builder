@@ -29,6 +29,16 @@ RSpec.describe Order, :type => :model do
     end
   end
 
+  describe 'validations' do
+    it 'validates that price matches selected options' do
+      guitar = subject.guitars.build
+      allow(guitar).to receive(:total_of_selected).and_return(40)
+      subject.price = 50
+      subject.valid?
+      expect(subject.errors[:price]).to include('does not match selected options')
+    end
+  end
+
   describe '.method_missing' do
     it 'allows hash constants to be called as methods & returns an array of values' do
       i18n_scope = [:models, :order]
