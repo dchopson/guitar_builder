@@ -1,8 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery.ui.all";
 
 #orders-table td{
   &:not(.td-button) {
-    @include text-overflow;  
+    @include text-overflow;
   }
 }

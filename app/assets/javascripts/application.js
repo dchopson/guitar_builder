@@ -14,6 +14,7 @@
 //= require i18n/translations
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
