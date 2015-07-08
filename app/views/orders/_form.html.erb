@@ -37,32 +37,49 @@
       <div class='panel panel-body'>
         <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
           <div class='row'>
+            <% Guitar.woods.each do |wood| %>
+              <div class='form-group col-md-3'>
+                <%= f.label wood[:text] %><br>
+                <img id=<%= wood[:value] %> class='draggable img-rounded'></img>
+              </div>
+            <% end %>
+          </div>
+
+          <div class='row'>
+
+            <!-- <div class='col-md-4'> -->
+              <%#= g.guitar_select(:body_wood) %>
+              <%= f.label 'Body Wood' %><br>
+              <img id='body_wood' class='form-group img-rounded droppable' />
+            <!-- </div> -->
+
+            <!-- <div class='col-md-6'> -->
+              <!-- <%= g.guitar_select(:fretboard_wood) %> -->
+            <!-- </div> -->
+
+            <!-- <div class='col-md-6'> -->
+              <!-- <%= g.guitar_select(:neck_wood) %> -->
+            <!-- </div> -->
+          </div>
+
+          <div class='row'>
             <div class='col-md-4'>
               <%= g.guitar_select(:body_style) %>
             </div>
             <div class='col-md-4'>
-              <%= g.guitar_select(:body_wood) %>
-            </div>
-            <div class='col-md-4'>
               <%= g.guitar_select(:body_finish) %>
             </div>
-          </div>
-          <div class='row'>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:fretboard_wood) %>
-            </div>
-            <div class='col-md-6'>
+            <div class='col-md-4'>
               <%= g.guitar_select(:fretboard_finish) %>
             </div>
           </div>
+
           <div class='row'>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:neck_wood) %>
-            </div>
             <div class='col-md-6'>
               <%= g.guitar_select(:neck_finish) %>
             </div>
           </div>
+
           <div class='row'>
             <div class='col-md-6'>
               <%= g.guitar_select(:tuning_peg_style) %>
