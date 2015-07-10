@@ -8,24 +8,36 @@ class Order
     @guitarSelects = $("select[id*='guitars_attributes']")
     @bindEvents()
     @updatePrice()
-    $( ".droppable" ).droppable({
-      activeClass: "ui-state-default",
-      hoverClass: "ui-state-hover",
-      drop: ( event, ui ) ->
-        $(@)
-          .addClass( "ui-state-highlight" )
-          .find( "p" )
-            .html( "Dropped!" );
+    @setupAnimations()
+
+  setupAnimations: ->
+    $draggable = $('.draggable')
+
+    $draggable.draggable({
+      revert: (event, ui) ->
+        $(@).data('ui-draggable').originalPosition = {
+          top: 0,
+          left: 0
+        }
+        !event;
+    })
+
+    $draggable.each ->
+      id = $(@).attr('id')
+      $(@).css('background-image', "url('/assets/" + id + ".jpg')")
+
+    $('.droppable').droppable({
+      activeClass: 'ui-state-default',
+      hoverClass: 'ui-state-hover',
+      drop: (event, ui) ->
+        $(@).val(ui.draggable[0].id)
+        # TODO @updatePrice
         ui.draggable.position({
           my: 'center',
           at: 'center',
           of: @
         })
-    });
-    $( ".draggable" ).draggable({ revert: "invalid" });
-    $('.draggable').each ->
-      id = $(@).attr('id')
-      $(@).css('background-image', "url('/assets/" + id + ".jpg')")
+    })
 
   bindEvents: =>
     @maxPrice.on('change', @updatePrice)
