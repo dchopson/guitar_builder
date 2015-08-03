@@ -7,11 +7,12 @@ class Order
     @maxPrice = $('#max_price')
     @guitarSelects = $("select[id*='guitars_attributes']")
     @bindEvents()
-    @updatePrice()
+    @guitarSelects.change()
 
   bindEvents: =>
-    @maxPrice.on('change', @updatePrice)
-    @guitarSelects.on('change', @updatePrice)
+    @maxPrice.change(@updatePrice)
+    @guitarSelects.change(@updatePrice)
+    @guitarSelects.change(@updateImage)
 
   updatePrice: =>
     order_price = 0
@@ -26,6 +27,11 @@ class Order
       $priceWarning.show()
     else
       $priceWarning.hide()
+
+  updateImage: ->
+    imgId = @.id.replace(@.id.substr(0,27), '')
+    $img = $('#' + imgId + '.temp')
+    $img.attr('src', '/assets/' + @.value + '.jpg')
 
 $(document).on 'ready page:load', ->
   new Order()

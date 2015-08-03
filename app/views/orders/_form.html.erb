@@ -37,20 +37,40 @@
       <div class='panel panel-body'>
         <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
           <div class='row'>
-            <div class='col-md-4'>
-              <%= g.guitar_select(:body_style) %>
+            <div class='col-md-3'>
+              <div class='thumbnail'>
+                <%= image_tag('placeholder.png', id: :body_style, class: :preview) %>
+                <div class='caption'>
+                  <%= g.guitar_select(:body_style) %>
+                </div>
+              </div>
             </div>
-            <div class='col-md-4'>
-              <%= g.guitar_select(:body_wood) %>
+            <div class='col-md-3'>
+              <div class='thumbnail'>
+                <%= image_tag('placeholder.png', id: :body_wood, class: [:preview, :temp]) %>
+                <div class='caption'>
+                  <%= g.guitar_select(:body_wood) %>
+                </div>
+              </div>
             </div>
-            <div class='col-md-4'>
-              <%= g.guitar_select(:body_finish) %>
+            <div class='col-md-3'>
+              <div class='thumbnail'>
+                <%= image_tag('placeholder.png', id: :body_finish, class: :preview) %>
+                <div class='caption'>
+                  <%= g.guitar_select(:body_finish) %>
+                </div>
+              </div>
+            </div>
+            <div class='col-md-3'>
+              <div class='thumbnail'>
+                <%= image_tag('placeholder.png', id: :fretboard_wood, class: [:preview, :temp]) %>
+                <div class='caption'>
+                  <%= g.guitar_select(:fretboard_wood) %>
+                </div>
+              </div>
             </div>
           </div>
           <div class='row'>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:fretboard_wood) %>
-            </div>
             <div class='col-md-6'>
               <%= g.guitar_select(:fretboard_finish) %>
             </div>
