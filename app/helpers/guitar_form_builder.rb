@@ -2,12 +2,9 @@
 class GuitarFormBuilder < ActionView::Helpers::FormBuilder
 
   def guitar_select(label)
-    tags = ''
-    Guitar.send(label.to_s.pluralize).each do |a|
-      tags += @template.content_tag(:option, a[:text], value: a[:value], data: a[:data])
-    end
+    choices = @template.options_for_select(Guitar.send(label.to_s.pluralize), @object.send(label))
     tag_with_label(label) do
-      @template.select(@object_name, label, nil, {}, options) { tags.html_safe }
+      @template.select(@object_name, label, choices, {}, options)
     end
   end
 
@@ -23,7 +20,7 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
 
   def guitar_checkbox(label)
     tag_with_label("#{label.to_s}?") do
-      @template.check_box(@object_name, label)
+      @template.check_box_tag("#{@object_name}[#{label}]", 1, @object.send(label)) 
     end
   end
 

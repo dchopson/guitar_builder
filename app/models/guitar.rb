@@ -53,11 +53,11 @@ class Guitar < ActiveRecord::Base
   def self.method_missing(method, *args)
     guitar_const = Guitar.const_get(method.upcase)
     guitar_const.map do |k,v|
-      {
-        text: I18n.t("#{method}.#{k}", scope: [:models, :guitar]),
-        value: k,
-        data: {price: v}
-      }
+      [
+        I18n.t("#{method}.#{k}", scope: [:models, :guitar]),
+        k,
+        {data: {price: v}}
+      ]
     end
   end
 
