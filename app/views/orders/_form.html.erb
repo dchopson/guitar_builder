@@ -37,68 +37,24 @@
       <div class='panel panel-body'>
         <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
           <div class='row'>
-            <div class='col-md-3'>
-              <div class='thumbnail'>
-                <%= image_tag('placeholder.png', id: :body_style, class: :preview) %>
-                <div class='caption'>
-                  <%= g.guitar_select(:body_style) %>
-                </div>
-              </div>
-            </div>
-            <div class='col-md-3'>
-              <div class='thumbnail'>
-                <%= image_tag('placeholder.png', id: :body_wood, class: [:preview, :temp]) %>
-                <div class='caption'>
-                  <%= g.guitar_select(:body_wood) %>
-                </div>
-              </div>
-            </div>
-            <div class='col-md-3'>
-              <div class='thumbnail'>
-                <%= image_tag('placeholder.png', id: :body_finish, class: :preview) %>
-                <div class='caption'>
-                  <%= g.guitar_select(:body_finish) %>
-                </div>
-              </div>
-            </div>
-            <div class='col-md-3'>
-              <div class='thumbnail'>
-                <%= image_tag('placeholder.png', id: :fretboard_wood, class: [:preview, :temp]) %>
-                <div class='caption'>
-                  <%= g.guitar_select(:fretboard_wood) %>
-                </div>
-              </div>
-            </div>
+            <%= g.guitar_select(:body_style) %>
+            <%= g.guitar_select(:body_wood, true) %>
+            <%= g.guitar_select(:body_finish) %>
+            <%= g.guitar_select(:fretboard_wood, true) %>
           </div>
           <div class='row'>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:fretboard_finish) %>
-            </div>
+            <%= g.guitar_select(:fretboard_finish) %>
+            <%= g.guitar_select(:neck_wood) %>
+            <%= g.guitar_select(:neck_finish) %>
+            <%= g.guitar_select(:tuning_peg_style) %>
           </div>
           <div class='row'>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:neck_wood) %>
-            </div>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:neck_finish) %>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:tuning_peg_style) %>
-            </div>
-            <div class='col-md-6'>
-              <%= g.guitar_select(:tuning_peg_layout) %>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-md-4'>
-              <%= g.guitar_select(:string_type) %>
-            </div>
-            <div class='col-md-4'>
+            <%= g.guitar_select(:tuning_peg_layout) %>
+            <%= g.guitar_select(:string_type) %>
+            <div class='col-md-3'>
               <%= g.guitar_checkbox(:fretboard_markers) %>
             </div>
-            <div class='col-md-4'>
+            <div class='col-md-3'>
               <%= g.guitar_checkbox(:pick_guard) %>
             </div>
           </div>
