@@ -13,10 +13,10 @@ RSpec.describe OrdersController, :type => :controller do
 
   context 'user logged in' do
     let(:user) do
-      u = User.create(
+      User.create(
         email: 'email@example.com',
-        password: "password",
-        password_confirmation: "password",
+        password: 'password',
+        password_confirmation: 'password',
       )
     end
 

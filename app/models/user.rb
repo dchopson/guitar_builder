@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
+  def self.all_for_select
+    all.map{|u| [u.name, u.id]}
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
