@@ -37,14 +37,14 @@
       <div class='panel panel-body'>
         <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
           <div class='row'>
-            <%= g.guitar_select(:body_style, true) %>
-            <%= g.guitar_select(:body_wood, true) %>
+            <%= g.guitar_select(:body_style) %>
+            <%= g.guitar_select(:body_wood) %>
             <%= g.guitar_select(:body_finish) %>
-            <%= g.guitar_select(:fretboard_wood, true) %>
+            <%= g.guitar_select(:fretboard_wood) %>
           </div>
           <div class='row'>
             <%= g.guitar_select(:fretboard_finish) %>
-            <%= g.guitar_select(:neck_wood, true) %>
+            <%= g.guitar_select(:neck_wood) %>
             <%= g.guitar_select(:neck_finish) %>
             <%= g.guitar_select(:tuning_peg_style) %>
           </div>

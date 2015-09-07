@@ -30,7 +30,7 @@ class Order
 
   updateImage: ->
     imgId = @.id.replace(@.id.substr(0,27), '')
-    $img = $('#' + imgId + '.temp')
+    $img = $('#' + imgId)
     $img.attr('src', '/assets/' + @.value + '.jpg')
 
 $(document).on 'ready page:load', ->

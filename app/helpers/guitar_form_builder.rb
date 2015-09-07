@@ -3,12 +3,11 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
 
   def guitar_select(label, temp=false)
     choices = @template.options_for_select(Guitar.send(label.to_s.pluralize), @object.send(label))
-    css_class = temp ? [:preview, :temp] : :preview
 
     @template.content_tag(:div, class: 'col-md-3') do
       @template.content_tag(:div, class: 'thumbnail') do
         result = ''
-        result += @template.image_tag('placeholder.png', id: label, class: css_class)
+        result += @template.image_tag('placeholder.png', id: label, class: :preview)
         result += @template.content_tag(:div, class: 'caption') do
           tag_with_label(label) do
             @template.select(@object_name, label, choices, {}, options)
