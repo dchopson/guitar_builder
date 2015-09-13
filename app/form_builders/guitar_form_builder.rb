@@ -1,8 +1,7 @@
-#TODO need to test this class
 class GuitarFormBuilder < ActionView::Helpers::FormBuilder
 
-  def guitar_select(label, temp=false)
-    choices = @template.options_for_select(Guitar.send(label.to_s.pluralize), @object.send(label))
+  def guitar_select(label)
+    choices = @template.options_for_select(Guitar.public_send(label.to_s.pluralize), @object.public_send(label))
 
     @template.content_tag(:div, class: 'col-md-3') do
       @template.content_tag(:div, class: 'thumbnail') do
@@ -26,13 +25,13 @@ class GuitarFormBuilder < ActionView::Helpers::FormBuilder
 
   def guitar_checkbox(label)
     tag_with_label("#{label.to_s}?") do
-      @template.check_box_tag("#{@object_name}[#{label}]", 1, @object.send(label))
+      @template.check_box_tag("#{@object_name}[#{label}]", 1, @object.public_send(label))
     end
   end
 
   def order_select(label)
     tag_with_label(label) do
-      @template.select(@object_name, label, Order.send(label.to_s.pluralize), {}, options)
+      @template.select(@object_name, label, Order.public_send(label.to_s.pluralize), {}, options)
     end
   end
 
