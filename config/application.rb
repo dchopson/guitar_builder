@@ -21,5 +21,6 @@ module GuitarBuilder
     # config.i18n.default_locale = :de
 
     config.assets.initialize_on_precompile = true
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

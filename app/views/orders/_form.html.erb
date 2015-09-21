@@ -1,6 +1,6 @@
 <% i18n_scope = [:views, :orders, :form] %>
 
-<%= form_for(@order, builder: GuitarFormBuilder) do |f| %>
+<%= form_for(@order, builder: FormBuilders::Order) do |f| %>
   <% if @order.errors.any? %>
     <div class='alert alert-danger' role='alert'>
       <%= pluralize(@order.errors.count, 'error') %> prohibited this order from being saved:
@@ -21,7 +21,7 @@
         </div>
         <div class='panel panel-body'>
           <%= f.user_select %>
-          <%= f.order_select(:status) %>
+          <%= f.select(:status) %>
           <div class='form-group'>
             <%= f.label :completion_date %><br>
             <%= f.date_field :completion_date, class: 'form-control' %>
@@ -35,31 +35,31 @@
         <h3><%= t(viewing? || editing? ? :guitar_intro_alt : :guitar_intro, scope: i18n_scope) %></h3>
       </div>
       <div class='panel panel-body'>
-        <%= f.fields_for :guitars, builder: GuitarFormBuilder do |g| %>
+        <%= f.fields_for :guitars, builder: FormBuilders::Guitar do |g| %>
           <div class='row'>
-            <%= g.guitar_select(:body_style) %>
-            <%= g.guitar_select(:body_wood) %>
-            <%= g.guitar_select(:body_finish) %>
-            <%= g.guitar_select(:fretboard_wood) %>
+            <%= g.select(:body_style) %>
+            <%= g.select(:body_wood) %>
+            <%= g.select(:body_finish) %>
+            <%= g.select(:fretboard_wood) %>
           </div>
           <div class='row'>
-            <%= g.guitar_select(:fretboard_finish) %>
-            <%= g.guitar_select(:neck_wood) %>
-            <%= g.guitar_select(:neck_finish) %>
-            <%= g.guitar_select(:tuning_peg_style) %>
+            <%= g.select(:fretboard_finish) %>
+            <%= g.select(:neck_wood) %>
+            <%= g.select(:neck_finish) %>
+            <%= g.select(:tuning_peg_style) %>
           </div>
           <div class='row'>
-            <%= g.guitar_select(:tuning_peg_layout) %>
-            <%= g.guitar_select(:string_type) %>
+            <%= g.select(:tuning_peg_layout) %>
+            <%= g.select(:string_type) %>
             <div class='col-md-3'>
-              <%= g.guitar_checkbox(:fretboard_markers) %>
+              <%= g.checkbox(:fretboard_markers) %>
             </div>
             <div class='col-md-3'>
-              <%= g.guitar_checkbox(:pick_guard) %>
+              <%= g.checkbox(:pick_guard) %>
             </div>
           </div>
         <% end %>
-        <%= f.order_text_field(:price, true) %>
+        <%= f.text_field(:price, true) %>
         <div id='price-warning' class='alert alert-warning form-group' role='alert' hidden></div>
         <div class='form-group'>
           <%= f.label :completion_date %><br>
@@ -76,18 +76,18 @@
         <div class='panel panel-body'>
           <div class='row'>
             <div class='col-md-3'>
-              <%= f.order_text_field(:first_name) %>
+              <%= f.text_field(:first_name) %>
             </div>
             <div class='col-md-3'>
-              <%= f.order_text_field(:last_name) %>
+              <%= f.text_field(:last_name) %>
             </div>
             <div class='col-md-6'>
             </div>
           </div>
 
-          <%= f.order_text_field(:address) %>
-          <%= f.order_text_field(:telephone) %>
-          <%= f.order_text_field(:email) %>
+          <%= f.text_field(:address) %>
+          <%= f.text_field(:telephone) %>
+          <%= f.text_field(:email) %>
         </div>
       </div>
     <% else %>
@@ -96,7 +96,7 @@
           <h3><%= t(:email_intro, scope: i18n_scope) %></h3>
         </div>
         <div class='panel panel-body'>
-          <%= f.order_text_field(:email) %>
+          <%= f.text_field(:email) %>
         </div>
       </div>
     <% end %>
