@@ -109,7 +109,7 @@
   <%= f.hidden_field :price %><br>
   <%= f.hidden_field :completion_date %><br>
 
-  <% if editing? || creating? %>
+  <% unless viewing? %>
     <div class='actions panel'>
       <% if @order.paid? %>
         <%= f.submit(class: 'btn btn-success') %>
