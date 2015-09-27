@@ -21,7 +21,7 @@ RSpec.describe FormBuilders::Order do
       user = User.create!(
         first_name: 'Bob',
         last_name: 'Smith',
-        email: 'email@example.com',
+        email: 'email@guitarbuilder.com',
         password: 'password',
         password_confirmation: 'password',
       )

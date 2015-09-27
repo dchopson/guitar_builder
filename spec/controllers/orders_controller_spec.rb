@@ -5,7 +5,7 @@ RSpec.describe OrdersController, :type => :controller do
     mock_model(Order,
                id: 1,
                number: '1234',
-               email: 'email@example.com',
+               email: 'email@guitarbuilder.com',
                price_in_cents: 5000,
                paid?: false)
   end
@@ -14,7 +14,7 @@ RSpec.describe OrdersController, :type => :controller do
   context 'user logged in' do
     let(:user) do
       User.create(
-        email: 'email@example.com',
+        email: 'email@guitarbuilder.com',
         password: 'password',
         password_confirmation: 'password',
       )
@@ -160,7 +160,7 @@ RSpec.describe OrdersController, :type => :controller do
     describe 'member actions' do
       context 'number and email params passed' do
         let(:number) { '1234' }
-        let(:email) { 'email@example.com' }
+        let(:email) { 'email@guitarbuilder.com' }
 
         it 'looks up the order' do
           expect(Order).to receive(:find_by).with(number: number, email: email)
