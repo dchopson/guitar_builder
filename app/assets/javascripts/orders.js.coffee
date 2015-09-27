@@ -18,11 +18,11 @@ class Order
     order_price = 0
     @guitarSelects.each ->
       order_price += $(@).find('option:selected').data('price')
-    $('#order_price').val(order_price)
+    $('input[name="order[price]"]').val(order_price)
 
     $priceWarning = $('#price-warning')
     max = @maxPrice.val()
-    if max > 0 && order_price > max
+    if max != '' && order_price > max
       $priceWarning.text(I18n.t('views.orders.form.max_price_exceeded'))
       $priceWarning.show()
     else

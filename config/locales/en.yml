@@ -64,7 +64,6 @@ en:
       index:
         title: Orders
       new:
-        intro: Ready to start your order? First choose a maximum price and we'll warn you if any options exceed it.
         max_price: Maximum Price
         title: New Order
       show:

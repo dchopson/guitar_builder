@@ -1,6 +1,15 @@
 <% i18n_scope = [:views, :orders, :form] %>
 
 <%= form_for(@order, builder: FormBuilders::Order) do |f| %>
+  <% content_for :sidebar do %>
+    <%= f.text_field(:price, true) %>
+    <div id='price-warning' class='alert alert-warning form-group' role='alert' hidden></div>
+    <div class='form-group'>
+      <%= f.label :completion_date %><br>
+      <%= f.date_field :completion_date, disabled: true, class: 'form-control' %>
+    </div>
+  <% end %>
+
   <% if @order.errors.any? %>
     <div class='alert alert-danger' role='alert'>
       <%= pluralize(@order.errors.count, 'error') %> prohibited this order from being saved:
@@ -59,12 +68,6 @@
             </div>
           </div>
         <% end %>
-        <%= f.text_field(:price, true) %>
-        <div id='price-warning' class='alert alert-warning form-group' role='alert' hidden></div>
-        <div class='form-group'>
-          <%= f.label :completion_date %><br>
-          <%= f.date_field :completion_date, disabled: true, class: 'form-control' %>
-        </div>
       </div>
     </div>
 
@@ -103,6 +106,9 @@
   </fieldset>
 
   <%= f.hidden_field :lock_version %><br>
+  <%= f.hidden_field :price %><br>
+  <%= f.hidden_field :completion_date %><br>
+
   <% if editing? || creating? %>
     <div class='actions panel'>
       <% if @order.paid? %>
