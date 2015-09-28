@@ -3,14 +3,13 @@
 
 <div class='jumbotron'>
   <div class='row'>
-    <div class='col-md-10'>
+    <div class='col-md-9'>
       <h1><%= t('jumbotron.header', scope: i18n_scope) %></h1></br>
       <p><%= t('jumbotron.description', scope: i18n_scope) %></p></br>
       <p><%= link_to(t('views.orders.new.title'), new_order_path, class: 'btn btn-primary btn-lg', role: 'button') %></p>
     </div>
-    <div class='col-md-2'>
-      <!-- http://findicons.com/icon/43064/fire_guitar?id=43071 -->
-      <%= image_tag('fire_guitar.png') %>
+    <div class='col-md-3'>
+      <%= image_tag('sketch.png', class: 'img-thumbnail') %>
     </div>
   </div>
 
