@@ -22,6 +22,14 @@ RSpec.describe User, :type => :model do
     end
   end
 
+  describe '.send_reset_password_instructions' do
+    it 'never returns errors' do
+      user.save!
+      invalid = described_class.send_reset_password_instructions(email: 'invalid@guitarbuilder.com')
+      expect(invalid.errors.messages).to be_empty
+    end
+  end
+
   describe '#name' do
     it 'concatenates first and last name' do
       expect(user.name).to eq 'Bob Smith'
