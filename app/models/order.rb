@@ -26,14 +26,19 @@ class Order < ActiveRecord::Base
     order_const.map{|_,v| v}
   end
 
+  # @return [Boolean] is the order paid for?
   def paid?
     purchased_at.present?
   end
 
+  # @return [Integer] the price converted from dollars to cents
   def price_in_cents
     price * 100
   end
 
+  # Sets the token value. Retrieves additional buyer attributes from the gateway
+  # and sets them as well
+  # @param token [String] the token received from PayPal
   def express_token=(token)
     write_attribute(:express_token, token)
     if token.present?
@@ -52,6 +57,8 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Completes the purchase on the PayPal side
+  # @return [Boolean] was the purchase successful?
   def purchase!
     response = process_purchase
     update_attribute(:purchased_at, DateTime.now) if response.success?

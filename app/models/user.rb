@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
+  # @return [Array] all users formatted for use in a form select
   def self.all_for_select
     all.map{|u| [u.name, u.id]}
   end
@@ -18,6 +19,7 @@ class User < ActiveRecord::Base
     recoverable
   end
 
+  # @return [String] concatentation of first and last names
   def name
     "#{first_name} #{last_name}"
   end

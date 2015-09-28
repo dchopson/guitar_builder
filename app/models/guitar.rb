@@ -61,6 +61,7 @@ class Guitar < ActiveRecord::Base
     end
   end
 
+  # @return [Integer] the total price of all selected options
   def total_of_selected
     BODY_STYLES[body_style.to_sym] +
     BODY_WOODS[body_wood.to_sym] +

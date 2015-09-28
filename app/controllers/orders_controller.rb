@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
   def show
   end
 
+  # GET /orders/new/express
   def express
     response = EXPRESS_GATEWAY.setup_purchase(@order.price_in_cents,
       :ip                => request.remote_ip,
