@@ -53,13 +53,14 @@ en:
       edit:
         title: 'Edit Order # %{number}'
       form:
-        guitar_intro: Use the options below to customize your guitar.
-        guitar_intro_alt: Guitar Options
-        order_intro: Shipping and Billing Details
-        email_intro: Enter your email address so you can look up your order later
-        max_price: Maximum Price
+        checkout: Checkout
+        details: Shipping and Billing Details
+        email_help: Can be different from your PayPal login
         employee:
           intro: Employee-Only Details
+        guitar_intro: Use the options below to customize your guitar.
+        guitar_intro_alt: Guitar Options
+        max_price: Maximum Price
       index:
         title: Orders
       new:

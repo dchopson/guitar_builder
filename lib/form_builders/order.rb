@@ -14,9 +14,9 @@ module FormBuilders
       end
     end
 
-    def text_field(label)
+    def text_field(label, opts={})
       tag_with_label(label) do
-        @template.text_field(@object_name, label, options)
+        @template.text_field(@object_name, label, options.merge(opts))
       end
     end
 

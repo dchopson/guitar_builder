@@ -78,41 +78,30 @@
       </div>
     </div>
 
-    <% if @order.paid? || editing? %>
-      <div class='panel panel-default'>
-        <div class='panel panel-heading'>
-          <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
-        </div>
-        <div class='panel panel-body'>
-          <%= f.text_field(:customer_name) %>
-          <%= f.text_area(:address) %>
-          <%= f.text_field(:telephone) %>
-          <%= f.text_field(:email) %>
+    <div class='panel panel-default'>
+      <div class='panel panel-heading'>
+        <h3><%= t(creating? ? :checkout : :details, scope: i18n_scope) %></h3>
+      </div>
+      <div class='panel panel-body'>
+        <div class='row'>
+          <div class='col-md-4'>
+            <% if @order.paid? || editing? %>
+              <%= f.text_field(:customer_name) %>
+              <%= f.text_area(:address) %>
+              <%= f.text_field(:telephone) %>
+              <%= f.text_field(:email) %>
+              <%= f.submit(class: 'btn btn-success') unless viewing? %>
+            <% else %>
+              <%= f.text_field(:email, placeholder: t(:email_help, scope: i18n_scope)) %>
+              <%= f.submit(type: :image, src: 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %>
+            <% end %>
+          </div>
         </div>
       </div>
-    <% else %>
-      <div class='panel panel-default'>
-        <div class='panel panel-heading'>
-          <h3><%= t(:email_intro, scope: i18n_scope) %></h3>
-        </div>
-        <div class='panel panel-body'>
-          <%= f.text_field(:email) %>
-        </div>
-      </div>
-    <% end %>
+    </div>
   </fieldset>
 
   <%= f.hidden_field :lock_version %><br>
   <%= f.hidden_field :price %><br>
   <%= f.hidden_field :completion_date %><br>
-
-  <% unless viewing? %>
-    <div class='actions panel'>
-      <% if @order.paid? %>
-        <%= f.submit(class: 'btn btn-success') %>
-      <% else %>
-        <%= f.submit(type: :image, src: 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %>
-      <% end %>
-    </div>
-  <% end %>
 <% end %>
