@@ -26,6 +26,11 @@ class Order < ActiveRecord::Base
     order_const.map{|_,v| v}
   end
 
+  # @return [String] concatentation of first and last names
+  def customer_name
+    "#{first_name} #{last_name}"
+  end
+
   # @return [Boolean] is the order paid for?
   def paid?
     purchased_at.present?
@@ -50,9 +55,9 @@ class Order < ActiveRecord::Base
       self.first_name = params[:first_name]
       self.last_name = params[:last_name]
       self.telephone = params[:phone]
-      self.address = "#{params[:street1]}; "\
-        "#{"#{params[:street2]}; " if params[:street2]}"\
-        "#{params[:city_name]}, #{params[:state_or_province]} #{params[:postal_code]}; "\
+      self.address = "#{params[:street1]}\n"\
+        "#{"#{params[:street2]}\n" if params[:street2]}"\
+        "#{params[:city_name]}, #{params[:state_or_province]} #{params[:postal_code]}\n"\
         "#{params[:country_name]}"
     end
   end

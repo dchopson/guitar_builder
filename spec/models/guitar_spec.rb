@@ -8,9 +8,9 @@ RSpec.describe Guitar, :type => :model do
   describe '.method_missing' do
     it 'allows hash constants to be called as methods & returns an array of values' do
       expect(described_class.body_styles).to include([
-        I18n.t('models.guitar.body_styles.cutaway'),
+        "#{I18n.t('models.guitar.body_styles.cutaway')} - $40",
         :cutaway,
-        {data: {price: 10}}
+        {data: {price: 40}}
       ])
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe Guitar, :type => :model do
       subject.tuning_peg_style = :square
       subject.tuning_peg_layout = :one_side
       subject.string_type = :steel
-      expect(subject.total_of_selected).to eq 90
+      expect(subject.total_of_selected).to eq 225
     end
   end
 end

@@ -14,10 +14,15 @@ module FormBuilders
       end
     end
 
-    def text_field(label, readonly=false)
+    def text_field(label)
       tag_with_label(label) do
-        opts = readonly ? options.merge(readonly: 'readonly') : options
-        @template.text_field(@object_name, label, opts)
+        @template.text_field(@object_name, label, options)
+      end
+    end
+
+    def text_area(label)
+      tag_with_label(label) do
+        @template.text_area(@object_name, label, options.merge(rows: 4))
       end
     end
   end

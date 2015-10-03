@@ -84,18 +84,8 @@
           <h3><%= t(:order_intro, scope: i18n_scope) %></h3>
         </div>
         <div class='panel panel-body'>
-          <div class='row'>
-            <div class='col-md-3'>
-              <%= f.text_field(:first_name) %>
-            </div>
-            <div class='col-md-3'>
-              <%= f.text_field(:last_name) %>
-            </div>
-            <div class='col-md-6'>
-            </div>
-          </div>
-
-          <%= f.text_field(:address) %>
+          <%= f.text_field(:customer_name) %>
+          <%= f.text_area(:address) %>
           <%= f.text_field(:telephone) %>
           <%= f.text_field(:email) %>
         </div>

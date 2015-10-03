@@ -30,12 +30,14 @@ RSpec.describe FormBuilders::Order do
   end
 
   describe '#text_field' do
-    it 'is not readonly by default' do
-      expect(subject.text_field(:first_name)).to_not include 'readonly'
+    it 'returns a text_field' do
+      expect(subject.text_field(:first_name)).to include 'type="text"'
     end
+  end
 
-    it 'is readonly when true is passed' do
-      expect(subject.text_field(:first_name, true)).to include 'readonly'
+  describe '#text_area' do
+    it 'returns a text_area' do
+      expect(subject.text_area(:address)).to include '</textarea>'
     end
   end
 end
