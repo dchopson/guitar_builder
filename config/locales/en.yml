@@ -57,14 +57,12 @@ en:
         guitar_intro_alt: Guitar Options
         order_intro: Shipping and Billing Details
         email_intro: Enter your email address so you can look up your order later
-        total_price: Total price
-        max_price_exceeded: You've exceeded your maximum price
+        max_price: Maximum Price
         employee:
           intro: Employee-Only Details
       index:
         title: Orders
       new:
-        max_price: Maximum Price
         title: New Order
       show:
         title: 'Order # %{number}'

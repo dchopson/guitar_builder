@@ -2,25 +2,25 @@ class Guitar < ActiveRecord::Base
   belongs_to :order
 
   FINISHES = {
-    gloss: 5,
-    raw: 10,
-    sunburst: 15
+    gloss: 25,
+    raw: 0,
+    sunburst: 35
   }
 
   WOODS = {
-    black_cherry: 5,
-    cherry: 10,
-    ebony: 10,
-    mahogany: 5,
-    oak: 5,
-    pine: 10,
-    spruce: 15
+    black_cherry: 50,
+    cherry: 40,
+    ebony: 70,
+    mahogany: 65,
+    oak: 35,
+    pine: 25,
+    spruce: 30
   }
 
   BODY_STYLES = {
-    cutaway: 10,
-    full: 5,
-    half_cutaway: 15
+    cutaway: 40,
+    full: 20,
+    half_cutaway: 30
   }
 
   BODY_WOODS = WOODS.select{|k,v| [:cherry, :mahogany, :spruce].include?(k)}
@@ -36,25 +36,25 @@ class Guitar < ActiveRecord::Base
   NECK_FINISHES = FINISHES.select{|k,v| [:gloss, :raw].include?(k)}
 
   STRING_TYPES = {
-    nylon: 5,
+    nylon: 8,
     steel: 10
   }
 
   TUNING_PEG_LAYOUTS = {
-    both_sides: 5,
-    one_side: 10
+    both_sides: 15,
+    one_side: 20
   }
 
   TUNING_PEG_STYLES = {
-    rounded: 5,
-    square: 10
+    rounded: 15,
+    square: 15
   }
 
   def self.method_missing(method, *args)
     guitar_const = Guitar.const_get(method.upcase)
     guitar_const.map do |k,v|
       [
-        I18n.t("#{method}.#{k}", scope: [:models, :guitar]),
+        "#{I18n.t("#{method}.#{k}", scope: [:models, :guitar])} - $#{v}",
         k,
         {data: {price: v}}
       ]

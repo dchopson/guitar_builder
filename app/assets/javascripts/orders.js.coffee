@@ -18,15 +18,17 @@ class Order
     order_price = 0
     @guitarSelects.each ->
       order_price += $(@).find('option:selected').data('price')
+    $priceLabel = $('span#price')
+    $priceLabel.text('$' + order_price)
     $('input[name="order[price]"]').val(order_price)
 
-    $priceWarning = $('#price-warning')
     max = @maxPrice.val()
     if max != '' && order_price > max
-      $priceWarning.text(I18n.t('views.orders.form.max_price_exceeded'))
-      $priceWarning.show()
+      $priceLabel.removeClass('label-success')
+      $priceLabel.addClass('label-warning')
     else
-      $priceWarning.hide()
+      $priceLabel.removeClass('label-warning')
+      $priceLabel.addClass('label-success')
 
   updateImage: ->
     imgId = @.id.replace(@.id.substr(0,27), '')
