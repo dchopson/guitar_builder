@@ -71,9 +71,9 @@ en:
         no_order_found: No order found
         title: Welcome
         jumbotron:
-          header: Welcome to GuitarBuilder
+          header: Welcome to %{site_name}
           description: Your one-stop shop for building, customizing, and ordering guitars
-    site_name: Guitar Builder
+    site_name: GuitarBuilder
     order_number: Order Number
     email: Email
     order_status: Order Status
