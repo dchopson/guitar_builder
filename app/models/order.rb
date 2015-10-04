@@ -27,8 +27,8 @@ class Order < ActiveRecord::Base
   end
 
   # @return [String] concatentation of first and last names
-  def customer_name
-    "#{first_name} #{last_name}"
+  def name
+    "#{last_name}, #{first_name}"
   end
 
   # @return [Boolean] is the order paid for?

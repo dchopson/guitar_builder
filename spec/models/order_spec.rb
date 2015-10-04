@@ -53,11 +53,11 @@ RSpec.describe Order, :type => :model do
   describe 'instance methods' do
     subject { described_class.new(price: 50) }
 
-    describe '#customer_name' do
+    describe '#name' do
       it 'concatenates first and last name' do
         subject.first_name = 'Bob'
         subject.last_name = 'Smith'
-        expect(subject.customer_name).to eq 'Bob Smith'
+        expect(subject.name).to eq 'Smith, Bob'
       end
     end
 
