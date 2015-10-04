@@ -2,6 +2,9 @@
 <% title t(:title, scope: i18n_scope) %>
 <h1><%= t(:title, scope: i18n_scope) %></h1>
 
+<%= datagrid_form_for @grid, url: orders_path %>
+<%= datagrid_table(@grid, html: {class: 'table'}) %>
+
 <table id='orders-table' class='table'>
   <thead>
     <tr>

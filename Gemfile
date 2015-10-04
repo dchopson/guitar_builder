@@ -30,6 +30,8 @@ gem 'devise'
 # For PayPal integration
 gem 'activemerchant'
 
+gem 'datagrid'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
