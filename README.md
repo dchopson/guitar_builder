@@ -8,8 +8,8 @@ A Rails demo app for building and ordering custom guitars and managing those ord
 - [x] Bootstrap
 - [x] User authorization (Devise)
 - [x] External API (PayPal)
-- [ ] Security best practices
-- [ ] 100% code & documentation coverage
+- [x] Security best practices
+- [x] 100% code & documentation coverage
 - [ ] Host on Heroku
 
 ## Configuring the application
