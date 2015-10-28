@@ -10,6 +10,7 @@ A Rails demo app for building and ordering custom guitars and managing those ord
 - [x] External API (PayPal)
 - [x] Security best practices
 - [x] 100% code & documentation coverage
+- [ ] Feature specs
 - [ ] Host on Heroku
 
 ## Configuring the application
