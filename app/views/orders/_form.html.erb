@@ -86,7 +86,7 @@
         <div class='row'>
           <div class='col-md-4'>
             <% if @order.paid? || editing? %>
-              <%= f.text_field(:customer_name) %>
+              <%= f.text_field(:name) %>
               <%= f.text_area(:address) %>
               <%= f.text_field(:telephone) %>
               <%= f.text_field(:email) %>
