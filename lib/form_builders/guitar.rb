@@ -5,7 +5,7 @@ module FormBuilders
     def select(label)
       choices = @template.options_for_select(::Guitar.public_send(label.to_s.pluralize), @object.public_send(label))
 
-      @template.content_tag(:div, class: 'col-md-3') do
+      @template.content_tag(:div, class: 'col-xs-6 col-md-3') do
         @template.content_tag(:div, class: 'thumbnail') do
           result = ''
           result += @template.image_tag('placeholder.png', id: label, class: :preview)
