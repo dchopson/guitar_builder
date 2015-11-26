@@ -21,6 +21,7 @@ RSpec.describe OrdersController, :type => :controller do
     end
 
     before :each do
+      user.confirm!
       sign_in user
     end
 
