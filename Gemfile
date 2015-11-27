@@ -30,6 +30,9 @@ gem 'devise'
 # For PayPal integration
 gem 'activemerchant'
 
+gem 'wice_grid'
+gem 'font-awesome-sass', '~> 4.3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

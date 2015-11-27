@@ -53,14 +53,6 @@ RSpec.describe Order, :type => :model do
   describe 'instance methods' do
     subject { described_class.new(price: 50) }
 
-    describe '#name' do
-      it 'concatenates first and last name' do
-        subject.first_name = 'Bob'
-        subject.last_name = 'Smith'
-        expect(subject.name).to eq 'Smith, Bob'
-      end
-    end
-
     describe '#paid?' do
       it 'returns false when there is not a purchased_at date' do
         expect(subject.paid?).to be_falsey

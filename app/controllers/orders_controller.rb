@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @orders = Order.all
+    @orders_grid = initialize_grid(Order)
   end
 
   # GET /orders/1

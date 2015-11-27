@@ -29,10 +29,4 @@ RSpec.describe User, :type => :model do
       expect(invalid.errors.messages).to be_empty
     end
   end
-
-  describe '#name' do
-    it 'concatenates first and last name' do
-      expect(user.name).to eq 'Bob Smith'
-    end
-  end
 end

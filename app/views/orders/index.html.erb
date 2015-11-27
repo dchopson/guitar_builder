@@ -2,6 +2,36 @@
 <% title t(:title, scope: i18n_scope) %>
 <h1><%= t(:title, scope: i18n_scope) %></h1>
 
+<%= grid(@orders_grid) do |g|
+  g.column name: 'Number', attribute: 'number' do |order|
+    order.number
+  end
+  g.column name: 'Completion Date', attribute: 'completion_date' do |order|
+    order.completion_date
+  end
+  g.column name: 'Status', attribute: 'status' do |order|
+    order.status
+  end
+  g.column name: 'Name', attribute: 'last_name' do |order|
+    order.name
+  end
+  g.column name: 'Telephone', attribute: 'telephone' do |order|
+    order.telephone
+  end
+  g.column name: 'Email', attribute: 'email' do |order|
+    order.email
+  end
+  g.column name: 'User', attribute: 'last_name' do |order|
+    order.user.try(:name)
+  end
+  g.column do |order|
+    link_to 'Edit', edit_order_path(order)
+  end
+  g.column do |order|
+    link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
+
 <table id='orders-table' class='table'>
   <thead>
     <tr>

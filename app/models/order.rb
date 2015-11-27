@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  include Name
+
   belongs_to :user
   has_many :guitars, dependent: :destroy
   accepts_nested_attributes_for :guitars
@@ -24,11 +26,6 @@ class Order < ActiveRecord::Base
     order_const = Order.const_get(method.upcase)
     return order_const unless order_const.is_a?(Hash)
     order_const.map{|_,v| v}
-  end
-
-  # @return [String] concatentation of first and last names
-  def name
-    "#{last_name}, #{first_name}"
   end
 
   # @return [Boolean] is the order paid for?

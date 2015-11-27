@@ -3,6 +3,9 @@ $grid-float-breakpoint: 850px;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
+@import "wice_grid";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 #orders-table td{
   &:not(.td-button) {
