@@ -25,8 +25,8 @@ module GuitarBuilder
 
     config.after_initialize do
       if ENV['PAYPAL_LOGIN']
-        mode = Rails.env.development? ? :test : Rails.env.to_sym
-        ActiveMerchant::Billing::Base.mode = mode
+        # mode = Rails.env.development? ? :test : Rails.env.to_sym
+        ActiveMerchant::Billing::Base.mode = :test # mode
         paypal_options = {
           :login => ENV['PAYPAL_LOGIN'],
           :password => ENV['PAYPAL_PASSWORD'],
