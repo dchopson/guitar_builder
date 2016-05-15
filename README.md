@@ -2,6 +2,8 @@
 
 A Rails demo app for building and ordering custom guitars and managing those orders.
 
+http://guitarbuilder.herokuapp.com/
+
 [ ![Codeship Status for dchopson/guitar_builder](https://codeship.com/projects/e90d5670-fcd5-0133-d954-4ed649fef8dc/status?branch=master)](https://codeship.com/projects/152085)
 
 ## Goals
@@ -13,7 +15,7 @@ A Rails demo app for building and ordering custom guitars and managing those ord
 - [x] Security best practices
 - [x] 100% code & documentation coverage
 - [ ] Feature specs
-- [ ] Host on Heroku
+- [x] Host on Heroku (TODO: use/accept a real email domain for employee users)
 
 ## Configuring the application
 You will need a valid PayPal sandbox [facilitator account](https://developer.paypal.com/developer/accounts/) with TEST API credentials. These should be added as environment variables to your bash profile (don't forget to source when finished):
