@@ -1,10 +1,13 @@
 # GuitarBuilder
 
+[ ![Codeship Status for dchopson/guitar_builder](https://codeship.com/projects/e90d5670-fcd5-0133-d954-4ed649fef8dc/status?branch=master)](https://codeship.com/projects/152085)
+
 A Rails demo app for building and ordering custom guitars and managing those orders.
 
-http://guitarbuilder.herokuapp.com/
-
-[ ![Codeship Status for dchopson/guitar_builder](https://codeship.com/projects/e90d5670-fcd5-0133-d954-4ed649fef8dc/status?branch=master)](https://codeship.com/projects/152085)
+* http://guitarbuilder.herokuapp.com/
+* PayPal test user:
+  * Email: guitarbuilder1@mailinator.com
+  * Password: guitarbuilder1
 
 ## Goals
 - [x] Rails
