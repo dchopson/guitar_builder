@@ -2,6 +2,8 @@
 
 A Rails demo app for building and ordering custom guitars and managing those orders.
 
+[ ![Codeship Status for dchopson/guitar_builder](https://codeship.com/projects/e90d5670-fcd5-0133-d954-4ed649fef8dc/status?branch=master)](https://codeship.com/projects/152085)
+
 ## Goals
 - [x] Rails
 - [x] JQuery
