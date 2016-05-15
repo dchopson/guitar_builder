@@ -22,5 +22,20 @@ module GuitarBuilder
 
     config.assets.initialize_on_precompile = true
     config.autoload_paths << Rails.root.join('lib')
+
+    config.after_initialize do
+      if ENV['PAYPAL_LOGIN']
+        mode = Rails.env.development? ? :test : Rails.env.to_sym
+        ActiveMerchant::Billing::Base.mode = mode
+        paypal_options = {
+          :login => ENV['PAYPAL_LOGIN'],
+          :password => ENV['PAYPAL_PASSWORD'],
+          :signature => ENV['PAYPAL_SIGNATURE']
+        }
+        ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+      else
+        puts 'WARNING: PayPal credentials needed for checkout process to work - see https://github.com/dchopson/guitar_builder#configuring-the-application'
+      end
+    end
   end
 end

@@ -13,6 +13,7 @@
 
 # Ignore Editor files
 .project
+*.idea
 
 # Ignore simplecov files
 /coverage
