@@ -39,6 +39,8 @@ gem 'activemerchant'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rails_12factor', group: :production
+
 gem 'i18n-js'
 
 group :development, :test do
