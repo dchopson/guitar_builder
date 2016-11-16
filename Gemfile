@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # For user authorization
-gem 'devise'
+gem 'devise', '~> 3'
 
 # For PayPal integration
 gem 'activemerchant'

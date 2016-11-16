@@ -252,7 +252,7 @@ DEPENDENCIES
   activemerchant
   bootstrap-sass
   coffee-rails (~> 4.0.0)
-  devise
+  devise (~> 3)
   guard
   guard-rspec
   i18n-js
